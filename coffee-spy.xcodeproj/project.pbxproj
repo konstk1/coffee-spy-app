@@ -14,6 +14,8 @@
 		FF105EF222728E0E006FD778 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF105EF122728E0E006FD778 /* Assets.xcassets */; };
 		FF105EF522728E0E006FD778 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF105EF322728E0E006FD778 /* LaunchScreen.storyboard */; };
 		FF105F0022728E0E006FD778 /* coffee_spyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF105EFF22728E0E006FD778 /* coffee_spyTests.swift */; };
+		FF74163522773F0500D52817 /* CoffeeSpy.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FF74163322773F0500D52817 /* CoffeeSpy.xcdatamodeld */; };
+		FF74163822773F5C00D52817 /* BleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF74163722773F5C00D52817 /* BleManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +40,8 @@
 		FF105EFB22728E0E006FD778 /* coffee-spyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "coffee-spyTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF105EFF22728E0E006FD778 /* coffee_spyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = coffee_spyTests.swift; sourceTree = "<group>"; };
 		FF105F0122728E0E006FD778 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FF74163422773F0500D52817 /* CoffeeSpy.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoffeeSpy.xcdatamodel; sourceTree = "<group>"; };
+		FF74163722773F5C00D52817 /* BleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,8 +84,10 @@
 			isa = PBXGroup;
 			children = (
 				FF105EE822728E0D006FD778 /* AppDelegate.swift */,
+				FF74163722773F5C00D52817 /* BleManager.swift */,
 				FF105EEA22728E0D006FD778 /* RoastViewController.swift */,
 				FF105EEC22728E0D006FD778 /* SettingsViewController.swift */,
+				FF74163622773F0A00D52817 /* CoreData */,
 				FF105EEE22728E0D006FD778 /* Main.storyboard */,
 				FF105EF122728E0E006FD778 /* Assets.xcassets */,
 				FF105EF322728E0E006FD778 /* LaunchScreen.storyboard */,
@@ -97,6 +103,14 @@
 				FF105F0122728E0E006FD778 /* Info.plist */,
 			);
 			path = "coffee-spyTests";
+			sourceTree = "<group>";
+		};
+		FF74163622773F0A00D52817 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				FF74163322773F0500D52817 /* CoffeeSpy.xcdatamodeld */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -202,6 +216,8 @@
 			files = (
 				FF105EED22728E0D006FD778 /* SettingsViewController.swift in Sources */,
 				FF105EE922728E0D006FD778 /* AppDelegate.swift in Sources */,
+				FF74163822773F5C00D52817 /* BleManager.swift in Sources */,
+				FF74163522773F0500D52817 /* CoffeeSpy.xcdatamodeld in Sources */,
 				FF105EEB22728E0D006FD778 /* RoastViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -469,6 +485,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		FF74163322773F0500D52817 /* CoffeeSpy.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				FF74163422773F0500D52817 /* CoffeeSpy.xcdatamodel */,
+			);
+			currentVersion = FF74163422773F0500D52817 /* CoffeeSpy.xcdatamodel */;
+			path = CoffeeSpy.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = FF105EDD22728E0D006FD778 /* Project object */;
 }
