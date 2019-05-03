@@ -7,9 +7,12 @@
 //
 
 import UIKit
+import Charts
 
 class RoastViewController: UIViewController {
 
+    @IBOutlet weak var chartView: LineChartView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.

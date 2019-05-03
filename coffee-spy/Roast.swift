@@ -8,15 +8,19 @@
 
 import Foundation
 
-final class MyRoast {
+public final class MyRoast {
     var startTimestamp: Date!
     
     var fcTime: TimeInterval?
     var scTime: TimeInterval?
     var stopTime: TimeInterval?
     
-    var bt = TempCurve()
-    var et = TempCurve()
+    public var btCurve = [TempSample]()
+    public var etCurve = [TempSample]()
+    
+    public init() {
+        
+    }
     
     func start() {
         startTimestamp = Date()
@@ -34,27 +38,53 @@ final class MyRoast {
         stopTime = Date().timeIntervalSince(startTimestamp)
     }
     
-    func addBtSample(temp: Int) {
-        let time = Date().timeIntervalSince(startTimestamp)
-        bt.addSample(time: time, temp: temp)
+    func addBtSample(temp: Double, time: TimeInterval? = nil) {
+        let time = time ?? Date().timeIntervalSince(startTimestamp)
+        btCurve.append(TempSample(time: time, temp: temp))
     }
     
-    func addEtSample(temp: Int) {
-        let time = Date().timeIntervalSince(startTimestamp)
-        et.addSample(time: time, temp: temp)
+    func addEtSample(temp: Double, time: TimeInterval? = nil) {
+        let time = time ?? Date().timeIntervalSince(startTimestamp)
+        etCurve.append(TempSample(time: time, temp: temp))
     }
 }
 
-struct TempCurve {
-    private(set) var timestamp = [TimeInterval]()
-    private(set) var temp = [Int]()
-    
-    var count: Int {
-        return timestamp.count
+extension MyRoast {
+    public func loadSampleCsv() {
+        let data = try! String(contentsOf: URL(fileURLWithPath: "/Users/kon/Library/Developer/Xcode/DerivedData/coffee-spy-gxhfygvqgfbdlpaxoxhbghrgxvta/Build/Products/Debug/SampleRoast.csv"))
+        
+        for line in data.components(separatedBy: "\n")[1...] {
+            var time: Int = 0
+            var beanTemp: Double = 0
+            var envTemp: Double = 0
+            
+            for (idx, column) in line.components(separatedBy: ",").enumerated() {
+                switch idx {
+                case 1:
+                    let timeParts = column.components(separatedBy: ":")
+                    time = Int(timeParts[0])! * 60 + Int(timeParts[1])!
+                case 2:
+                    beanTemp = Double(column)!
+                case 3:
+                    envTemp = Double(column)!
+                default:
+                    // nothing
+                    break
+                }
+            }
+            
+            addBtSample(temp: beanTemp, time: TimeInterval(time))
+            addEtSample(temp: envTemp, time: TimeInterval(time))
+        }
+        print("Loaded")
     }
     
-    mutating func addSample(time: TimeInterval, temp: Int) {
-        timestamp.append(time)
-        self.temp.append(temp)
+    public func printData() {
+        
     }
+}
+
+public struct TempSample {
+    public var time: TimeInterval
+    public var temp: Double
 }

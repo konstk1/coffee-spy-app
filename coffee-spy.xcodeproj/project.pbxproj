@@ -6,6 +6,21 @@
 	objectVersion = 50;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		FFE2AFBD227A09A800C68D63 /* playground */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = FFE2AFC0227A09A800C68D63 /* Build configuration list for PBXAggregateTarget "playground" */;
+			buildPhases = (
+				FFE2AFC2227A0A0400C68D63 /* ShellScript */,
+				FFE2AFC8227A1B8500C68D63 /* CopyFiles */,
+			);
+			dependencies = (
+			);
+			name = playground;
+			productName = playground;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		FF105EE922728E0D006FD778 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF105EE822728E0D006FD778 /* AppDelegate.swift */; };
 		FF105EEB22728E0D006FD778 /* RoastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF105EEA22728E0D006FD778 /* RoastViewController.swift */; };
@@ -16,9 +31,11 @@
 		FF105F0022728E0E006FD778 /* coffee_spyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF105EFF22728E0E006FD778 /* coffee_spyTests.swift */; };
 		FF74163522773F0500D52817 /* CoffeeSpy.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FF74163322773F0500D52817 /* CoffeeSpy.xcdatamodeld */; };
 		FF74163822773F5C00D52817 /* BleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF74163722773F5C00D52817 /* BleManager.swift */; };
-		FF74163A2278FAA000D52817 /* Roast.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7416392278FAA000D52817 /* Roast.swift */; };
 		FF74163C227901C900D52817 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = FF74163B227901C900D52817 /* Cartfile */; };
-		FF74163F2279046000D52817 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF74163E2279046000D52817 /* Charts.framework */; };
+		FFE2AFC3227A0CD200C68D63 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF74163E2279046000D52817 /* Charts.framework */; };
+		FFE2AFC5227A0E5600C68D63 /* Roast.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE2AFC4227A0E5600C68D63 /* Roast.swift */; };
+		FFE2AFC7227A19C800C68D63 /* SampleRoast.csv in Resources */ = {isa = PBXBuildFile; fileRef = FFE2AFC6227A19C800C68D63 /* SampleRoast.csv */; };
+		FFE2AFC9227A1B9D00C68D63 /* SampleRoast.csv in CopyFiles */ = {isa = PBXBuildFile; fileRef = FFE2AFC6227A19C800C68D63 /* SampleRoast.csv */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,6 +47,19 @@
 			remoteInfo = "coffee-spy";
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		FFE2AFC8227A1B8500C68D63 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+				FFE2AFC9227A1B9D00C68D63 /* SampleRoast.csv in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		FF105EE522728E0D006FD778 /* coffee-spy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "coffee-spy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -45,9 +75,11 @@
 		FF105F0122728E0E006FD778 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FF74163422773F0500D52817 /* CoffeeSpy.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoffeeSpy.xcdatamodel; sourceTree = "<group>"; };
 		FF74163722773F5C00D52817 /* BleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleManager.swift; sourceTree = "<group>"; };
-		FF7416392278FAA000D52817 /* Roast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Roast.swift; sourceTree = "<group>"; };
 		FF74163B227901C900D52817 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		FF74163E2279046000D52817 /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = Carthage/Build/iOS/Charts.framework; sourceTree = "<group>"; };
+		FFE2AFB22279FBF700C68D63 /* Charts.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Charts.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		FFE2AFC4227A0E5600C68D63 /* Roast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Roast.swift; sourceTree = "<group>"; };
+		FFE2AFC6227A19C800C68D63 /* SampleRoast.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SampleRoast.csv; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,7 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FF74163F2279046000D52817 /* Charts.framework in Frameworks */,
+				FFE2AFC3227A0CD200C68D63 /* Charts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,6 +104,8 @@
 		FF105EDC22728E0D006FD778 = {
 			isa = PBXGroup;
 			children = (
+				FFE2AFC6227A19C800C68D63 /* SampleRoast.csv */,
+				FFE2AFB22279FBF700C68D63 /* Charts.playground */,
 				FF74163B227901C900D52817 /* Cartfile */,
 				FF105EE722728E0D006FD778 /* coffee-spy */,
 				FF105EFE22728E0E006FD778 /* coffee-spyTests */,
@@ -93,7 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				FF105EE822728E0D006FD778 /* AppDelegate.swift */,
-				FF7416392278FAA000D52817 /* Roast.swift */,
+				FFE2AFC4227A0E5600C68D63 /* Roast.swift */,
 				FF74163722773F5C00D52817 /* BleManager.swift */,
 				FF105EEA22728E0D006FD778 /* RoastViewController.swift */,
 				FF105EEC22728E0D006FD778 /* SettingsViewController.swift */,
@@ -141,6 +175,7 @@
 				FF105EE122728E0D006FD778 /* Sources */,
 				FF105EE222728E0D006FD778 /* Frameworks */,
 				FF105EE322728E0D006FD778 /* Resources */,
+				FF7416592279FAEE00D52817 /* Copy Carthage Frameworks */,
 			);
 			buildRules = (
 			);
@@ -186,6 +221,9 @@
 						CreatedOnToolsVersion = 10.2.1;
 						TestTargetID = FF105EE422728E0D006FD778;
 					};
+					FFE2AFBD227A09A800C68D63 = {
+						CreatedOnToolsVersion = 10.2.1;
+					};
 				};
 			};
 			buildConfigurationList = FF105EE022728E0D006FD778 /* Build configuration list for PBXProject "coffee-spy" */;
@@ -203,6 +241,7 @@
 			targets = (
 				FF105EE422728E0D006FD778 /* coffee-spy */,
 				FF105EFA22728E0E006FD778 /* coffee-spyTests */,
+				FFE2AFBD227A09A800C68D63 /* playground */,
 			);
 		};
 /* End PBXProject section */
@@ -213,6 +252,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FF105EF522728E0E006FD778 /* LaunchScreen.storyboard in Resources */,
+				FFE2AFC7227A19C800C68D63 /* SampleRoast.csv in Resources */,
 				FF105EF222728E0E006FD778 /* Assets.xcassets in Resources */,
 				FF74163C227901C900D52817 /* Cartfile in Resources */,
 				FF105EF022728E0D006FD778 /* Main.storyboard in Resources */,
@@ -228,15 +268,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		FF7416592279FAEE00D52817 /* Copy Carthage Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Charts.framework",
+			);
+			name = "Copy Carthage Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/sh\ncarthage copy-frameworks\n";
+		};
+		FFE2AFC2227A0A0400C68D63 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/sh\n\nexport CARTHAGE_DIR=${SRCROOT}/Carthage/Build/iOS/\nexport DEBUG_DIR=${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}\n\necho \"🔎 Checking frameworks directory: $CARTHAGE_DIR\"\n\nif [ -d $CARTHAGE_DIR ]; then\necho \"✅ Frameworks directory exists!\"\necho \"🗃 Going to copy frameworks to $DEBUG_DIR\"\nmkdir -p \"$DEBUG_DIR\"\ncp -Rv \"$CARTHAGE_DIR\" \"$DEBUG_DIR\"\necho \"🎉 Success!\"\nelse\necho \"💀 There is no frameworks directory.\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		FF105EE122728E0D006FD778 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFE2AFC5227A0E5600C68D63 /* Roast.swift in Sources */,
 				FF105EED22728E0D006FD778 /* SettingsViewController.swift in Sources */,
 				FF105EE922728E0D006FD778 /* AppDelegate.swift in Sources */,
 				FF74163822773F5C00D52817 /* BleManager.swift in Sources */,
-				FF74163A2278FAA000D52817 /* Roast.swift in Sources */,
 				FF74163522773F0500D52817 /* CoffeeSpy.xcdatamodeld in Sources */,
 				FF105EEB22728E0D006FD778 /* RoastViewController.swift in Sources */,
 			);
@@ -401,6 +480,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = LG2FJE6R72;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -423,6 +503,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = LG2FJE6R72;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -482,6 +563,26 @@
 			};
 			name = Release;
 		};
+		FFE2AFBE227A09A800C68D63 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LG2FJE6R72;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		FFE2AFBF227A09A800C68D63 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LG2FJE6R72;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -508,6 +609,15 @@
 			buildConfigurations = (
 				FF105F0822728E0E006FD778 /* Debug */,
 				FF105F0922728E0E006FD778 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FFE2AFC0227A09A800C68D63 /* Build configuration list for PBXAggregateTarget "playground" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FFE2AFBE227A09A800C68D63 /* Debug */,
+				FFE2AFBF227A09A800C68D63 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
