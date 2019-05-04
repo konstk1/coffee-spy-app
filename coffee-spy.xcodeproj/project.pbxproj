@@ -32,7 +32,6 @@
 		FF74163522773F0500D52817 /* CoffeeSpy.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FF74163322773F0500D52817 /* CoffeeSpy.xcdatamodeld */; };
 		FF74163822773F5C00D52817 /* BleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF74163722773F5C00D52817 /* BleManager.swift */; };
 		FF74163C227901C900D52817 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = FF74163B227901C900D52817 /* Cartfile */; };
-		FFE2AFC3227A0CD200C68D63 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF74163E2279046000D52817 /* Charts.framework */; };
 		FFE2AFC5227A0E5600C68D63 /* Roast.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE2AFC4227A0E5600C68D63 /* Roast.swift */; };
 		FFE2AFC7227A19C800C68D63 /* SampleRoast.csv in Resources */ = {isa = PBXBuildFile; fileRef = FFE2AFC6227A19C800C68D63 /* SampleRoast.csv */; };
 		FFE2AFC9227A1B9D00C68D63 /* SampleRoast.csv in CopyFiles */ = {isa = PBXBuildFile; fileRef = FFE2AFC6227A19C800C68D63 /* SampleRoast.csv */; };
@@ -87,7 +86,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FFE2AFC3227A0CD200C68D63 /* Charts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,11 +9,20 @@
 import Foundation
 
 public final class MyRoast {
-    var startTimestamp: Date!
+    var startTimestamp: Date?
     
     var fcTime: TimeInterval?
     var scTime: TimeInterval?
     var stopTime: TimeInterval?
+    
+    var elapsedTime: TimeInterval {
+        guard let startTimestamp = startTimestamp else { return 0 }
+        return Date().timeIntervalSince(startTimestamp)
+    }
+    
+    var isRunning: Bool {
+        return startTimestamp != nil && stopTime == nil
+    }
     
     public var btCurve = [TempSample]()
     public var etCurve = [TempSample]()
@@ -24,26 +33,40 @@ public final class MyRoast {
     
     func start() {
         startTimestamp = Date()
+        stopTime = nil
+        fcTime = nil
+        scTime = nil
     }
     
     func markFC() {
-        fcTime = Date().timeIntervalSince(startTimestamp)
+        fcTime = elapsedTime
     }
     
     func marcSC() {
-        scTime = Date().timeIntervalSince(startTimestamp)
+        scTime = elapsedTime
     }
     
     func stop() {
-        stopTime = Date().timeIntervalSince(startTimestamp)
+        stopTime = elapsedTime
     }
     
     func addBtSample(temp: Double, time: TimeInterval? = nil) {
-        let time = time ?? Date().timeIntervalSince(startTimestamp)
-        btCurve.append(TempSample(time: time, temp: temp))
+        var sampleTime: TimeInterval
+        
+        if time == nil, let startTimestamp = startTimestamp {
+            sampleTime = Date().timeIntervalSince(startTimestamp)
+        } else if let time = time {
+            sampleTime = time
+        } else {
+            return
+        }
+        
+        btCurve.append(TempSample(time: sampleTime, temp: temp))
     }
     
     func addEtSample(temp: Double, time: TimeInterval? = nil) {
+        guard let startTimestamp = startTimestamp else { return }
+
         let time = time ?? Date().timeIntervalSince(startTimestamp)
         etCurve.append(TempSample(time: time, temp: temp))
     }
@@ -52,6 +75,8 @@ public final class MyRoast {
 extension MyRoast {
     public func loadSampleCsv() {
         let data = try! String(contentsOf: URL(fileURLWithPath: "/Users/kon/Library/Developer/Xcode/DerivedData/coffee-spy-gxhfygvqgfbdlpaxoxhbghrgxvta/Build/Products/Debug/SampleRoast.csv"))
+        
+        print(data)
         
         for line in data.components(separatedBy: "\n")[1...] {
             var time: Int = 0
@@ -76,7 +101,8 @@ extension MyRoast {
             addBtSample(temp: beanTemp, time: TimeInterval(time))
             addEtSample(temp: envTemp, time: TimeInterval(time))
         }
-        print("Loaded")
+        
+        print("Loaded \(btCurve.count) samples")
     }
     
     public func printData() {

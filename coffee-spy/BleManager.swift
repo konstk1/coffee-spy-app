@@ -26,6 +26,8 @@ final class BleManager: NSObject {
     private var centralManager: CBCentralManager!
     private var coffeeSpyPeriph: CBPeripheral!
     
+    private var simTimer: Timer?
+    
     fileprivate override init() {
         super.init()
         let centralQueue = DispatchQueue(label: "coffee.ble-central")
@@ -33,14 +35,32 @@ final class BleManager: NSObject {
     }
     
     fileprivate func scan() {
+    #if targetEnvironment(simulator)
+        startSimulation()
+    #else
         centralManager.scanForPeripherals(withServices: [coffeeSpyServiceUUID], options: nil)
         print("BLE scanning...")
+    #endif
     }
     
     func disconnect() {
         guard let periph = coffeeSpyPeriph else { return }
         print("BLE disconnecting coffee-spy")
         centralManager.cancelPeripheralConnection(periph)
+    }
+    
+    fileprivate func startSimulation() {
+        print("BLE Simulation...")
+        var i = 0
+        let roast = MyRoast()
+        roast.loadSampleCsv()
+        DispatchQueue.main.async {
+            self.simTimer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: true) { [weak self] (timer) in
+                let sample = roast.btCurve[i % roast.btCurve.count]
+                self?.delegate?.didUpdateTemperature1(tempC: Int(sample.temp))
+                i += 1
+            }
+        }
     }
 }
 
@@ -53,12 +73,16 @@ extension BleManager: CBCentralManagerDelegate {
             print("central.state is .resetting")
         case .unsupported:
             print("central.state is .unsupported")
+            #if targetEnvironment(simulator)
+            scan()
+            #endif
         case .unauthorized:
             print("central.state is .unauthorized")
         case .poweredOff:
             print("central.state is .poweredOff")
         case .poweredOn:
             print("central.state is .poweredOn")
+            scan()
         @unknown default:
             print("central.state is @unknown default")
         }
