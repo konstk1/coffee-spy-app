@@ -18,6 +18,8 @@ class RoastViewController: UIViewController {
     
     @IBOutlet weak var chartView: LineChartView!
     
+    @IBOutlet weak var btLabel: UILabel!
+    @IBOutlet weak var etLabel: UILabel!
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var startButton: UIButton!
     
@@ -81,31 +83,39 @@ extension RoastViewController: BleManagerDelegate {
     }
     
     func didUpdateTemperature1(tempC: Int) {
-        // if roast is not running, ignore updates
-        guard let roast = roast, roast.isRunning else { return }
-        
-        print("Updated temp 1 (BT): \(tempC)")
-        // add sample to roast
-        roast.addBtSample(temp: Double(tempC))
-        
-        // add sample to chart
-        guard let sample = roast.btCurve.last else { return }
-        chartView.data!.addEntry(ChartDataEntry(x: sample.time, y: sample.temp.asFahrenheit()), dataSetIndex: 0)
-        chartView.notifyDataSetChanged()
+        DispatchQueue.main.async { [unowned self] in
+            self.btLabel.text = "BT: \(Int(Double(tempC).asFahrenheit()))°F"
+            
+            // if roast is not running, ignore updates
+            guard let roast = self.roast, roast.isRunning else { return }
+            
+            print("Updated temp 1 (BT): \(tempC)")
+            // add sample to roast
+            roast.addBtSample(temp: Double(tempC))
+            
+            // add sample to chart
+            guard let sample = roast.btCurve.last else { return }
+            self.chartView.data!.addEntry(ChartDataEntry(x: sample.time, y: sample.temp.asFahrenheit()), dataSetIndex: 0)
+            self.chartView.notifyDataSetChanged()
+        }
     }
     
     func didUpdateTemperature2(tempC: Int) {
-        // if roast is not running, ignore updates
-        guard let roast = roast, roast.isRunning else { return }
-        
-        print("Updated temp 2 (ET): \(tempC)")
-        // add sample to roast
-        roast.addEtSample(temp: Double(tempC))
-        
-        // add sample to chart
-        guard let sample = roast.etCurve.last else { return }
-        chartView.data!.addEntry(ChartDataEntry(x: sample.time, y: sample.temp.asFahrenheit()), dataSetIndex: 1)
-        chartView.notifyDataSetChanged()
+        DispatchQueue.main.async { [unowned self] in
+            self.etLabel.text = "ET: \(Int(Double(tempC).asFahrenheit()))°F"
+            
+            // if roast is not running, ignore updates
+            guard let roast = self.roast, roast.isRunning else { return }
+            
+            print("Updated temp 2 (ET): \(tempC)")
+            // add sample to roast
+            roast.addEtSample(temp: Double(tempC))
+            
+            // add sample to chart
+            guard let sample = roast.etCurve.last else { return }
+            self.chartView.data!.addEntry(ChartDataEntry(x: sample.time, y: sample.temp.asFahrenheit()), dataSetIndex: 1)
+            self.chartView.notifyDataSetChanged()
+        }
     }
 }
 
@@ -134,6 +144,7 @@ extension RoastViewController {
         // chart
         chartView.data = data
         chartView.backgroundColor = UIColor(red: 0.2, green: 0.5, blue: 1, alpha: 0)
+        chartView.doubleTapToZoomEnabled = false
         
         // legend
         chartView.legend.textColor = .white

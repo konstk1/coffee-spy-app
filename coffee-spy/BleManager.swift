@@ -93,14 +93,14 @@ extension BleManager: CBCentralManagerDelegate {
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         print("Discovered coffee-spy, connecting...")
+        coffeeSpyPeriph = peripheral
+        coffeeSpyPeriph.delegate = self
         // TODO: enable ble backround mode
         centralManager.connect(peripheral, options: nil)
     }
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         print("Connected to coffee-spy")
-        coffeeSpyPeriph = peripheral
-        coffeeSpyPeriph.delegate = self
         delegate?.didConnect()
         coffeeSpyPeriph.discoverServices([coffeeSpyServiceUUID])
     }
@@ -148,7 +148,7 @@ extension BleManager: CBPeripheralDelegate {
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         guard let value = characteristic.value else { return }
         
-        let tempC: Int32 = value.withUnsafeBytes { $0.load(as: Int32.self) }
+        let tempC: Int32 = value.withUnsafeBytes { $0.load(as: Int32.self) }.bigEndian
         print("Updated char \(characteristic) with \(tempC)")
         
         switch characteristic.uuid {
