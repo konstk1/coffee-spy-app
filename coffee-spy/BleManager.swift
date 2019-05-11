@@ -11,11 +11,13 @@ import CoreBluetooth
 
 let coffeeSpyServiceUUID = CBUUID(string: "CFFE")
 let coffeeTemp1CharServiceUUID = CBUUID(string: "FE01")
+let coffeeTemp2CharServiceUUID = CBUUID(string: "FE02")
 
 protocol BleManagerDelegate: class {
     func didConnect()
     func didDisconnect()
     func didUpdateTemperature1(tempC: Int)
+    func didUpdateTemperature2(tempC: Int)
 }
 
 final class BleManager: NSObject {
@@ -56,8 +58,9 @@ final class BleManager: NSObject {
         roast.loadSampleCsv()
         DispatchQueue.main.async {
             self.simTimer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: true) { [weak self] (timer) in
-                let sample = roast.btCurve[i % roast.btCurve.count]
-                self?.delegate?.didUpdateTemperature1(tempC: Int(sample.temp))
+                let (btSample, etSample) = (roast.btCurve[i % roast.btCurve.count], roast.etCurve[i % roast.btCurve.count])
+                self?.delegate?.didUpdateTemperature1(tempC: Int(btSample.temp))
+                self?.delegate?.didUpdateTemperature2(tempC: Int(etSample.temp))
                 i += 1
             }
         }
@@ -133,6 +136,11 @@ extension BleManager: CBPeripheralDelegate {
                 if char.properties.contains(.notify) {
                     peripheral.setNotifyValue(true, for: char)
                 }
+            } else if char.uuid == coffeeTemp2CharServiceUUID {
+                print("Found Temp 2 char")
+                if char.properties.contains(.notify) {
+                    peripheral.setNotifyValue(true, for: char)
+                }
             }
         }
     }
@@ -142,6 +150,15 @@ extension BleManager: CBPeripheralDelegate {
         
         let tempC: Int32 = value.withUnsafeBytes { $0.load(as: Int32.self) }
         print("Updated char \(characteristic) with \(tempC)")
-        delegate?.didUpdateTemperature1(tempC: Int(tempC))
+        
+        switch characteristic.uuid {
+        case coffeeTemp1CharServiceUUID:
+            delegate?.didUpdateTemperature1(tempC: Int(tempC))
+        case coffeeTemp2CharServiceUUID:
+            delegate?.didUpdateTemperature2(tempC: Int(tempC))
+        default:
+            print("BLE: Notify on unknown char")
+            break
+        }
     }
 }

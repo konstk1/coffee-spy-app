@@ -50,25 +50,27 @@ public final class MyRoast {
         stopTime = elapsedTime
     }
     
-    func addBtSample(temp: Double, time: TimeInterval? = nil) {
+    fileprivate func addTempSample(temp: DegreesC, time: TimeInterval?, curve: inout [TempSample]) {
         var sampleTime: TimeInterval
         
-        if time == nil, let startTimestamp = startTimestamp {
+        switch (time, startTimestamp) {
+        case let (nil, startTimestamp?):
             sampleTime = Date().timeIntervalSince(startTimestamp)
-        } else if let time = time {
+        case let (time?, _):
             sampleTime = time
-        } else {
+        default:
             return
         }
-        
-        btCurve.append(TempSample(time: sampleTime, temp: temp))
+    
+        curve.append(TempSample(time: sampleTime, temp: temp))
     }
     
-    func addEtSample(temp: Double, time: TimeInterval? = nil) {
-        guard let startTimestamp = startTimestamp else { return }
-
-        let time = time ?? Date().timeIntervalSince(startTimestamp)
-        etCurve.append(TempSample(time: time, temp: temp))
+    func addBtSample(temp: DegreesC, time: TimeInterval? = nil) {
+        addTempSample(temp: temp, time: time, curve: &btCurve)
+    }
+    
+    func addEtSample(temp: DegreesC, time: TimeInterval? = nil) {
+        addTempSample(temp: temp, time: time, curve: &etCurve)
     }
 }
 
@@ -80,8 +82,8 @@ extension MyRoast {
         
         for line in data.components(separatedBy: "\n")[1...] {
             var time: Int = 0
-            var beanTemp: Double = 0
-            var envTemp: Double = 0
+            var beanTemp: DegreesC = 0
+            var envTemp: DegreesC = 0
             
             for (idx, column) in line.components(separatedBy: ",").enumerated() {
                 switch idx {
@@ -89,9 +91,10 @@ extension MyRoast {
                     let timeParts = column.components(separatedBy: ":")
                     time = Int(timeParts[0])! * 60 + Int(timeParts[1])!
                 case 2:
-                    beanTemp = Double(column)!
+                    // this sample csv has temps in F, need to convert to C
+                    beanTemp = Double(column)!.asCelcius()
                 case 3:
-                    envTemp = Double(column)!
+                    envTemp = Double(column)!.asCelcius()
                 default:
                     // nothing
                     break
@@ -112,5 +115,5 @@ extension MyRoast {
 
 public struct TempSample {
     public var time: TimeInterval
-    public var temp: Double
+    public var temp: DegreesC
 }

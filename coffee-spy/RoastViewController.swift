@@ -84,13 +84,27 @@ extension RoastViewController: BleManagerDelegate {
         // if roast is not running, ignore updates
         guard let roast = roast, roast.isRunning else { return }
         
-        print("Updated temp: \(tempC)")
+        print("Updated temp 1 (BT): \(tempC)")
         // add sample to roast
         roast.addBtSample(temp: Double(tempC))
         
         // add sample to chart
         guard let sample = roast.btCurve.last else { return }
-        chartView.data!.addEntry(ChartDataEntry(x: sample.time, y: sample.temp), dataSetIndex: 0)
+        chartView.data!.addEntry(ChartDataEntry(x: sample.time, y: sample.temp.asFahrenheit()), dataSetIndex: 0)
+        chartView.notifyDataSetChanged()
+    }
+    
+    func didUpdateTemperature2(tempC: Int) {
+        // if roast is not running, ignore updates
+        guard let roast = roast, roast.isRunning else { return }
+        
+        print("Updated temp 2 (ET): \(tempC)")
+        // add sample to roast
+        roast.addEtSample(temp: Double(tempC))
+        
+        // add sample to chart
+        guard let sample = roast.etCurve.last else { return }
+        chartView.data!.addEntry(ChartDataEntry(x: sample.time, y: sample.temp.asFahrenheit()), dataSetIndex: 1)
         chartView.notifyDataSetChanged()
     }
 }
@@ -135,7 +149,7 @@ extension RoastViewController {
         chartView.xAxis.valueFormatter = TimeFormatter()
         
         // left y axis
-        chartView.leftAxis.axisMinimum = 0.0
+        chartView.leftAxis.axisMinimum = 100.0
         chartView.leftAxis.axisMaximum = 500.0
         chartView.leftAxis.gridColor = .white
         chartView.leftAxis.labelTextColor = .white
