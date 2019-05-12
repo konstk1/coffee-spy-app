@@ -217,6 +217,11 @@
 				TargetAttributes = {
 					FF105EE422728E0D006FD778 = {
 						CreatedOnToolsVersion = 10.2.1;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					FF105EFA22728E0E006FD778 = {
 						CreatedOnToolsVersion = 10.2.1;

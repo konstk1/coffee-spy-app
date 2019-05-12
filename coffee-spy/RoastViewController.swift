@@ -11,7 +11,7 @@ import Charts
 
 class RoastViewController: UIViewController {
 
-    private let bleManager = BleManager.shareInstance
+    private let bleManager = BleManager.shared
     
     private var roast: MyRoast?
     private var roastTimer: Timer?
@@ -20,6 +20,7 @@ class RoastViewController: UIViewController {
     
     @IBOutlet weak var btLabel: UILabel!
     @IBOutlet weak var etLabel: UILabel!
+    @IBOutlet weak var deviceLabel: UILabel!
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var startButton: UIButton!
     
@@ -37,6 +38,8 @@ class RoastViewController: UIViewController {
         chartView.data?.dataSets[0].clear()
         chartView.data?.dataSets[1].clear()
         chartView.notifyDataSetChanged()
+        
+        timerLabel.text = roast?.elapsedTime.asMinSecString()
     }
     
     @IBAction func startPushed(_ sender: UIButton) {
@@ -46,10 +49,7 @@ class RoastViewController: UIViewController {
             roast?.start()
             
             roastTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] (timer) in
-                guard let roast = self?.roast else { return }
-                let min = Int(roast.elapsedTime / 60)
-                let sec = Int(roast.elapsedTime) % 60
-                self?.timerLabel.text = String(format: "%02d:%02d", min, sec)
+                self?.timerLabel.text = self?.roast?.elapsedTime.asMinSecString()
             }
             
             startButton.setTitle("STOP", for: .normal)
@@ -74,12 +74,18 @@ class RoastViewController: UIViewController {
 
 // MARK: BleManagerDelegate
 extension RoastViewController: BleManagerDelegate {
-    func didConnect() {
-        
+    func didConnect(uuidStr: String) {
+        DispatchQueue.main.async { [unowned self] in
+            self.deviceLabel.text = "Dev: \(uuidStr.suffix(4))"
+        }
     }
     
     func didDisconnect() {
-        
+        DispatchQueue.main.async { [unowned self] in
+            self.btLabel.text = "BT:   N/A"
+            self.etLabel.text = "BT:   N/A"
+            self.deviceLabel.text = "Dev: N/A"
+        }
     }
     
     func didUpdateTemperature1(tempC: Int) {
@@ -89,9 +95,10 @@ extension RoastViewController: BleManagerDelegate {
             // if roast is not running, ignore updates
             guard let roast = self.roast, roast.isRunning else { return }
             
-            print("Updated temp 1 (BT): \(tempC)")
+            let tempC = DegreesC(tempC)
+//            print("Updated temp 1 (BT): \(tempC)°C (\(tempC.asFahrenheit())°F)")
             // add sample to roast
-            roast.addBtSample(temp: Double(tempC))
+            roast.addBtSample(temp: tempC)
             
             // add sample to chart
             guard let sample = roast.btCurve.last else { return }
@@ -107,7 +114,8 @@ extension RoastViewController: BleManagerDelegate {
             // if roast is not running, ignore updates
             guard let roast = self.roast, roast.isRunning else { return }
             
-            print("Updated temp 2 (ET): \(tempC)")
+            let tempC = DegreesC(tempC)
+//            print("Updated temp 2 (ET): \(tempC)°C (\(tempC.asFahrenheit())°F)")
             // add sample to roast
             roast.addEtSample(temp: Double(tempC))
             
@@ -153,15 +161,22 @@ extension RoastViewController {
         chartView.legend.drawInside = true
         
         // x axis
+        chartView.xAxis.axisMinimum = 0
         chartView.xAxis.axisMaximum = 15 * 60
-        chartView.xAxis.drawGridLinesEnabled = false
+        chartView.xAxis.labelCount = 16
+        chartView.xAxis.forceLabelsEnabled = true
         chartView.xAxis.labelPosition = .bottom
         chartView.xAxis.labelTextColor = .white
         chartView.xAxis.valueFormatter = TimeFormatter()
+        chartView.xAxis.drawGridLinesEnabled = true
+        chartView.xAxis.gridColor = .white
+        chartView.xAxis.gridLineWidth = 0.2
+        chartView.xAxis.gridLineDashLengths = [5, 4]
         
         // left y axis
-        chartView.leftAxis.axisMinimum = 100.0
+        chartView.leftAxis.axisMinimum = 0.0
         chartView.leftAxis.axisMaximum = 500.0
+        chartView.leftAxis.labelCount = 10
         chartView.leftAxis.gridColor = .white
         chartView.leftAxis.labelTextColor = .white
         
@@ -170,13 +185,13 @@ extension RoastViewController {
         chartView.rightAxis.axisMaximum = 50.0
         chartView.rightAxis.labelTextColor = .white
         chartView.rightAxis.drawGridLinesEnabled = false
+        
+        chartView.notifyDataSetChanged()
     }
     
     class TimeFormatter: IAxisValueFormatter {
         func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-            let mins = Int(value / 60)
-            let secs = Int(value) % 60
-            return String(format: "%d:%02d", mins, secs)
+            return value.asMinSecString()
         }
     }
 }

@@ -14,14 +14,14 @@ let coffeeTemp1CharServiceUUID = CBUUID(string: "FE01")
 let coffeeTemp2CharServiceUUID = CBUUID(string: "FE02")
 
 protocol BleManagerDelegate: class {
-    func didConnect()
+    func didConnect(uuidStr: String)
     func didDisconnect()
     func didUpdateTemperature1(tempC: Int)
     func didUpdateTemperature2(tempC: Int)
 }
 
 final class BleManager: NSObject {
-    static var shareInstance = BleManager()
+    static var shared = BleManager()
     
     var delegate: BleManagerDelegate?
     
@@ -38,7 +38,9 @@ final class BleManager: NSObject {
     
     fileprivate func scan() {
     #if targetEnvironment(simulator)
-        startSimulation()
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) { [weak self] in
+            self?.startSimulation()
+        }
     #else
         centralManager.scanForPeripherals(withServices: [coffeeSpyServiceUUID], options: nil)
         print("BLE scanning...")
@@ -53,12 +55,13 @@ final class BleManager: NSObject {
     
     fileprivate func startSimulation() {
         print("BLE Simulation...")
+        delegate?.didConnect(uuidStr: "SIM0")
         var i = 0
         let roast = MyRoast()
         roast.loadSampleCsv()
         DispatchQueue.main.async {
             self.simTimer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: true) { [weak self] (timer) in
-                let (btSample, etSample) = (roast.btCurve[i % roast.btCurve.count], roast.etCurve[i % roast.btCurve.count])
+                let (btSample, etSample) = (roast.btCurve[i % roast.btCurve.count], roast.etCurve[i % roast.etCurve.count])
                 self?.delegate?.didUpdateTemperature1(tempC: Int(btSample.temp))
                 self?.delegate?.didUpdateTemperature2(tempC: Int(etSample.temp))
                 i += 1
@@ -101,16 +104,18 @@ extension BleManager: CBCentralManagerDelegate {
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         print("Connected to coffee-spy")
-        delegate?.didConnect()
+        delegate?.didConnect(uuidStr: peripheral.identifier.uuidString)
         coffeeSpyPeriph.discoverServices([coffeeSpyServiceUUID])
     }
     
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
         print("Failed to connect to coffee-spy: \(String(describing: error))")
+        coffeeSpyPeriph = nil
     }
     
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         print("Disconnected from coffee-spy")
+        coffeeSpyPeriph = nil
         delegate?.didDisconnect()
     }
 }

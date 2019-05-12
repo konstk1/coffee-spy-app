@@ -28,7 +28,7 @@ public final class MyRoast {
     public var etCurve = [TempSample]()
     
     public init() {
-        
+        print("Roast init")
     }
     
     func start() {
@@ -51,15 +51,17 @@ public final class MyRoast {
     }
     
     fileprivate func addTempSample(temp: DegreesC, time: TimeInterval?, curve: inout [TempSample]) {
+        guard stopTime == nil else { return }   // if roast stopped (non-nil stopTime), ignore sample
+        
         var sampleTime: TimeInterval
         
         switch (time, startTimestamp) {
-        case let (nil, startTimestamp?):
+        case let (nil, startTimestamp?):        // no time provided, requires startTimestamp
             sampleTime = Date().timeIntervalSince(startTimestamp)
-        case let (time?, _):
+        case let (time?, _):                    // time provided, ignore startTimestamp
             sampleTime = time
-        default:
-            return
+        default:                                // no time provided and roast hasn't started
+            return                              // ignore sample
         }
     
         curve.append(TempSample(time: sampleTime, temp: temp))
@@ -74,11 +76,11 @@ public final class MyRoast {
     }
 }
 
-extension MyRoast {
-    public func loadSampleCsv() {
+public extension MyRoast {
+    func loadSampleCsv() {
         let data = try! String(contentsOf: URL(fileURLWithPath: "/Users/kon/Library/Developer/Xcode/DerivedData/coffee-spy-gxhfygvqgfbdlpaxoxhbghrgxvta/Build/Products/Debug/SampleRoast.csv"))
         
-        print(data)
+//        print(data)
         
         for line in data.components(separatedBy: "\n")[1...] {
             var time: Int = 0
