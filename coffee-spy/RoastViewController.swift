@@ -50,7 +50,7 @@ class RoastViewController: UIViewController {
     
     @IBAction func startPushed(_ sender: UIButton) {
         if roast == nil || !roast!.isRunning {
-            print("Starting roast")
+            log.verbose("Starting roast")
             reset()
             roast?.start()
             
@@ -60,7 +60,7 @@ class RoastViewController: UIViewController {
             
             startButton.setTitle("STOP", for: .normal)
         } else {
-            print("Stopping roast")
+            log.verbose("Stopping roast")
             roast?.stop()
             roastTimer?.invalidate()
             startButton.setTitle("START", for: .normal)

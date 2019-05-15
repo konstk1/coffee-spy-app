@@ -7,12 +7,30 @@
 //
 
 import UIKit
+import CoreData
 
 class RoastsViewController: UITableViewController {
+    
+    fileprivate lazy var fetchedResultsController: NSFetchedResultsController<Roast> = {
+        let fetchRequest: NSFetchRequest<Roast> = Roast.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Roast.startTimestamp, ascending: false)]
+        
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: DataController.shared.mainObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+        
+        fetchedResultsController.delegate = self
+        return fetchedResultsController
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        do {
+            try fetchedResultsController.performFetch()
+//            tableView.reloadData()
+        } catch let error {
+            fatalError("Failed to fetch shipments from CoreData: \(error)")
+        }
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -27,7 +45,8 @@ class RoastsViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        guard let roasts = fetchedResultsController.fetchedObjects else { return 0 }
+        return roasts.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -35,7 +54,8 @@ class RoastsViewController: UITableViewController {
             return UITableViewCell()
         }
         
-        cell.testLabel.text = "Roast \(indexPath.row)"
+        let roast = fetchedResultsController.object(at: indexPath)
+        cell.testLabel.text = "Roast \(roast.startTimestamp!)"
         
         return cell
     }
@@ -70,4 +90,42 @@ class RoastsViewController: UITableViewController {
     }
     */
 
+}
+
+// MARK: NSFetchedResultsControllerDelegate
+extension RoastsViewController: NSFetchedResultsControllerDelegate {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.beginUpdates()
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            if let indexPath = newIndexPath {
+                tableView.insertRows(at: [indexPath], with: .automatic)
+            }
+        case .delete:
+            if let indexPath = indexPath {
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
+        case .update:
+            if let indexPath = indexPath,
+                let cell = tableView.cellForRow(at: indexPath) as? RoastCell {
+                log.warning("Update not implemented")
+            }
+        case .move:
+            if let indexPath = indexPath {
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
+            if let newIndexPath = newIndexPath {
+                tableView.insertRows(at: [newIndexPath], with: .automatic)
+            }
+        @unknown default:
+            fatalError("Unknown case in Roast fetch results delegate")
+        }
+    }
 }

@@ -43,18 +43,18 @@ final class BleManager: NSObject {
         }
     #else
         centralManager.scanForPeripherals(withServices: [coffeeSpyServiceUUID], options: nil)
-        print("BLE scanning...")
+        log.info("BLE scanning...")
     #endif
     }
     
     func disconnect() {
         guard let periph = coffeeSpyPeriph else { return }
-        print("BLE disconnecting coffee-spy")
+        log.info("BLE disconnecting coffee-spy")
         centralManager.cancelPeripheralConnection(periph)
     }
     
     fileprivate func startSimulation() {
-        print("BLE Simulation...")
+        log.info("BLE Simulation...")
         delegate?.didConnect(uuidStr: "SIM0")
         var i = 0
         let context = DataController.shared.makeChildContext()
@@ -62,6 +62,7 @@ final class BleManager: NSObject {
         roast.loadSampleCsv()
         DispatchQueue.main.async {
             self.simTimer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: true) { [weak self] (timer) in
+                let context = context
                 let (btSample, etSample) = (roast.btCurve!.object(at: i % roast.btCurve!.count) as! BtSample, roast.etCurve!.object(at: i % roast.etCurve!.count) as! EtSample)
                 self?.delegate?.didUpdateTemperature1(tempC: Int(btSample.tempC))
                 self?.delegate?.didUpdateTemperature2(tempC: Int(etSample.tempC))
@@ -75,28 +76,28 @@ extension BleManager: CBCentralManagerDelegate {
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         switch central.state {
         case .unknown:
-            print("central.state is .unknown")
+            log.warning("central.state is .unknown")
         case .resetting:
-            print("central.state is .resetting")
+            log.warning("central.state is .resetting")
         case .unsupported:
-            print("central.state is .unsupported")
+            log.warning("central.state is .unsupported")
             #if targetEnvironment(simulator)
             scan()
             #endif
         case .unauthorized:
-            print("central.state is .unauthorized")
+            log.warning("central.state is .unauthorized")
         case .poweredOff:
-            print("central.state is .poweredOff")
+            log.warning("central.state is .poweredOff")
         case .poweredOn:
-            print("central.state is .poweredOn")
+            log.verbose("central.state is .poweredOn")
             scan()
         @unknown default:
-            print("central.state is @unknown default")
+            log.error("central.state is @unknown default")
         }
     }
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        print("Discovered coffee-spy, connecting...")
+        log.verbose("Discovered coffee-spy, connecting...")
         coffeeSpyPeriph = peripheral
         coffeeSpyPeriph.delegate = self
         // TODO: enable ble backround mode
@@ -104,18 +105,18 @@ extension BleManager: CBCentralManagerDelegate {
     }
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
-        print("Connected to coffee-spy")
+        log.info("Connected to coffee-spy")
         delegate?.didConnect(uuidStr: peripheral.identifier.uuidString)
         coffeeSpyPeriph.discoverServices([coffeeSpyServiceUUID])
     }
     
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
-        print("Failed to connect to coffee-spy: \(String(describing: error))")
+        log.error("Failed to connect to coffee-spy: \(String(describing: error))")
         coffeeSpyPeriph = nil
     }
     
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
-        print("Disconnected from coffee-spy")
+        log.info("Disconnected from coffee-spy")
         coffeeSpyPeriph = nil
         delegate?.didDisconnect()
     }
@@ -124,7 +125,7 @@ extension BleManager: CBCentralManagerDelegate {
 extension BleManager: CBPeripheralDelegate {
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         guard let services = peripheral.services else { return }
-        print("Discovered coffee-spy service")
+        log.verbose("Discovered coffee-spy service")
         for service in services {
             print("   \(service)")
             peripheral.discoverCharacteristics(nil, for: service)
@@ -133,17 +134,17 @@ extension BleManager: CBPeripheralDelegate {
     
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
         guard let chars = service.characteristics else { return }
-        print("Discovered characteristics")
+        log.verbose("Discovered characteristics")
         for char in chars {
             print("   \(char)")
             
             if char.uuid == coffeeTemp1CharServiceUUID {
-                print("Found Temp 1 char")
+                log.verbose("Found Temp 1 char")
                 if char.properties.contains(.notify) {
                     peripheral.setNotifyValue(true, for: char)
                 }
             } else if char.uuid == coffeeTemp2CharServiceUUID {
-                print("Found Temp 2 char")
+                log.verbose("Found Temp 2 char")
                 if char.properties.contains(.notify) {
                     peripheral.setNotifyValue(true, for: char)
                 }
@@ -155,7 +156,7 @@ extension BleManager: CBPeripheralDelegate {
         guard let value = characteristic.value else { return }
         
         let tempC: Int32 = value.withUnsafeBytes { $0.load(as: Int32.self) }.bigEndian
-        print("Updated char \(characteristic) with \(tempC)")
+        log.verbose("Updated char \(characteristic) with \(tempC)")
         
         switch characteristic.uuid {
         case coffeeTemp1CharServiceUUID:
@@ -163,7 +164,7 @@ extension BleManager: CBPeripheralDelegate {
         case coffeeTemp2CharServiceUUID:
             delegate?.didUpdateTemperature2(tempC: Int(tempC))
         default:
-            print("BLE: Notify on unknown char")
+            log.warning("BLE: Notify on unknown char")
             break
         }
     }
