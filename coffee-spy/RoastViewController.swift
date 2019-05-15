@@ -7,13 +7,15 @@
 //
 
 import UIKit
+import CoreData
 import Charts
 
 class RoastViewController: UIViewController {
 
     private let bleManager = BleManager.shared
     
-    private var roast: MyRoast?
+    private var context: NSManagedObjectContext?
+    private var roast: Roast?
     private var roastTimer: Timer?
     
     @IBOutlet weak var chartView: LineChartView!
@@ -32,8 +34,12 @@ class RoastViewController: UIViewController {
     }
     
     func reset() {
+        // creating new child context will discard any unsaved Roast data
+        context = DataController.shared.makeChildContext()
+        
         // create new roast
-        roast = MyRoast()
+        roast = Roast(context: context!)
+        
         // clear chart data
         chartView.data?.dataSets[0].clear()
         chartView.data?.dataSets[1].clear()
@@ -68,7 +74,8 @@ class RoastViewController: UIViewController {
     }
     
     @IBAction func savePushed(_ sender: Any) {
-        
+        guard let context = context else { fatalError("Context for save is nil") }
+        DataController.shared.saveContext(context, saveParent: true)
     }
 }
 
@@ -101,8 +108,8 @@ extension RoastViewController: BleManagerDelegate {
             roast.addBtSample(temp: tempC)
             
             // add sample to chart
-            guard let sample = roast.btCurve.last else { return }
-            self.chartView.data!.addEntry(ChartDataEntry(x: sample.time, y: sample.temp.asFahrenheit()), dataSetIndex: 0)
+            guard let sample = roast.btCurve?.lastObject as? BtSample else { return }
+            self.chartView.data!.addEntry(ChartDataEntry(x: sample.time, y: sample.tempC.asFahrenheit()), dataSetIndex: 0)
             self.chartView.notifyDataSetChanged()
         }
     }
@@ -120,8 +127,8 @@ extension RoastViewController: BleManagerDelegate {
             roast.addEtSample(temp: Double(tempC))
             
             // add sample to chart
-            guard let sample = roast.etCurve.last else { return }
-            self.chartView.data!.addEntry(ChartDataEntry(x: sample.time, y: sample.temp.asFahrenheit()), dataSetIndex: 1)
+            guard let sample = roast.etCurve?.lastObject as? EtSample else { return }
+            self.chartView.data!.addEntry(ChartDataEntry(x: sample.time, y: sample.tempC.asFahrenheit()), dataSetIndex: 1)
             self.chartView.notifyDataSetChanged()
         }
     }

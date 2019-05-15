@@ -57,13 +57,14 @@ final class BleManager: NSObject {
         print("BLE Simulation...")
         delegate?.didConnect(uuidStr: "SIM0")
         var i = 0
-        let roast = MyRoast()
+        let context = DataController.shared.makeChildContext()
+        let roast = Roast(context: context)
         roast.loadSampleCsv()
         DispatchQueue.main.async {
             self.simTimer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: true) { [weak self] (timer) in
-                let (btSample, etSample) = (roast.btCurve[i % roast.btCurve.count], roast.etCurve[i % roast.etCurve.count])
-                self?.delegate?.didUpdateTemperature1(tempC: Int(btSample.temp))
-                self?.delegate?.didUpdateTemperature2(tempC: Int(etSample.temp))
+                let (btSample, etSample) = (roast.btCurve!.object(at: i % roast.btCurve!.count) as! BtSample, roast.etCurve!.object(at: i % roast.etCurve!.count) as! EtSample)
+                self?.delegate?.didUpdateTemperature1(tempC: Int(btSample.tempC))
+                self?.delegate?.didUpdateTemperature2(tempC: Int(etSample.tempC))
                 i += 1
             }
         }

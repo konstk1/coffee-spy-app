@@ -1,7 +1,41 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14490.99" systemVersion="18E226" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Roast" representedClassName="Roast" syncable="YES" codeGenerationType="class"/>
+    <entity name="Bean" representedClassName="Bean" syncable="YES" codeGenerationType="class">
+        <attribute name="altitudeM" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="country" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="grower" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isDecaf" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="process" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="seller" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="roast" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Roast" inverseName="bean" inverseEntity="Roast" syncable="YES"/>
+    </entity>
+    <entity name="BtSample" representedClassName="BtSample" parentEntity="TempSample" syncable="YES" codeGenerationType="class">
+        <relationship name="roast" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Roast" inverseName="btCurve" inverseEntity="Roast" syncable="YES"/>
+    </entity>
+    <entity name="EtSample" representedClassName="EtSample" parentEntity="TempSample" syncable="YES" codeGenerationType="class">
+        <relationship name="roast" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Roast" inverseName="etCurve" inverseEntity="Roast" syncable="YES"/>
+    </entity>
+    <entity name="Roast" representedClassName="Roast" syncable="YES" codeGenerationType="category">
+        <attribute name="firstCrackTime" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="roastNote" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="secondCrackTime" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="startTimestamp" optional="YES" attributeType="Transformable" customClassName="Date" syncable="YES"/>
+        <attribute name="stopTime" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="tasteNote" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="bean" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Bean" inverseName="roast" inverseEntity="Bean" syncable="YES"/>
+        <relationship name="btCurve" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="BtSample" inverseName="roast" inverseEntity="BtSample" syncable="YES"/>
+        <relationship name="etCurve" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="EtSample" inverseName="roast" inverseEntity="EtSample" syncable="YES"/>
+    </entity>
+    <entity name="TempSample" representedClassName="TempSample" isAbstract="YES" syncable="YES" codeGenerationType="class">
+        <attribute name="tempC" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="time" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
     <elements>
-        <element name="Roast" positionX="-63" positionY="-18" width="128" height="45"/>
+        <element name="Roast" positionX="-63" positionY="-18" width="128" height="180"/>
+        <element name="TempSample" positionX="-63" positionY="-18" width="128" height="75"/>
+        <element name="Bean" positionX="-45" positionY="45" width="128" height="165"/>
+        <element name="BtSample" positionX="-36" positionY="99" width="128" height="60"/>
+        <element name="EtSample" positionX="-27" positionY="108" width="128" height="60"/>
     </elements>
 </model>

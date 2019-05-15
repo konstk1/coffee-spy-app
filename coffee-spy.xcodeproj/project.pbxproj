@@ -29,6 +29,10 @@
 		FF105EF222728E0E006FD778 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF105EF122728E0E006FD778 /* Assets.xcassets */; };
 		FF105EF522728E0E006FD778 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF105EF322728E0E006FD778 /* LaunchScreen.storyboard */; };
 		FF105F0022728E0E006FD778 /* coffee_spyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF105EFF22728E0E006FD778 /* coffee_spyTests.swift */; };
+		FF391BD4228B780900A12EC5 /* Roast+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF391BD2228B780900A12EC5 /* Roast+CoreDataClass.swift */; };
+		FF391BD7228B926300A12EC5 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF391BD6228B926300A12EC5 /* DataController.swift */; };
+		FF391BD9228B9A1600A12EC5 /* RoastsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF391BD8228B9A1600A12EC5 /* RoastsViewController.swift */; };
+		FF391BDB228B9A6900A12EC5 /* RoastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF391BDA228B9A6900A12EC5 /* RoastCell.swift */; };
 		FF463344228737D200E3E70C /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF463343228737D200E3E70C /* Utilities.swift */; };
 		FF74163522773F0500D52817 /* CoffeeSpy.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FF74163322773F0500D52817 /* CoffeeSpy.xcdatamodeld */; };
 		FF74163822773F5C00D52817 /* BleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF74163722773F5C00D52817 /* BleManager.swift */; };
@@ -74,6 +78,10 @@
 		FF105EFB22728E0E006FD778 /* coffee-spyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "coffee-spyTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF105EFF22728E0E006FD778 /* coffee_spyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = coffee_spyTests.swift; sourceTree = "<group>"; };
 		FF105F0122728E0E006FD778 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FF391BD2228B780900A12EC5 /* Roast+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Roast+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FF391BD6228B926300A12EC5 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		FF391BD8228B9A1600A12EC5 /* RoastsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoastsViewController.swift; sourceTree = "<group>"; };
+		FF391BDA228B9A6900A12EC5 /* RoastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoastCell.swift; sourceTree = "<group>"; };
 		FF463343228737D200E3E70C /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		FF74163422773F0500D52817 /* CoffeeSpy.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoffeeSpy.xcdatamodel; sourceTree = "<group>"; };
 		FF74163722773F5C00D52817 /* BleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleManager.swift; sourceTree = "<group>"; };
@@ -129,9 +137,11 @@
 			isa = PBXGroup;
 			children = (
 				FF105EE822728E0D006FD778 /* AppDelegate.swift */,
-				FFE2AFC4227A0E5600C68D63 /* Roast.swift */,
 				FF74163722773F5C00D52817 /* BleManager.swift */,
+				FFE2AFC4227A0E5600C68D63 /* Roast.swift */,
+				FF391BDA228B9A6900A12EC5 /* RoastCell.swift */,
 				FF105EEA22728E0D006FD778 /* RoastViewController.swift */,
+				FF391BD8228B9A1600A12EC5 /* RoastsViewController.swift */,
 				FF105EEC22728E0D006FD778 /* SettingsViewController.swift */,
 				FF463343228737D200E3E70C /* Utilities.swift */,
 				FF8079CA2287D67600C356EA /* Todo.txt */,
@@ -156,6 +166,8 @@
 		FF74163622773F0A00D52817 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				FF391BD6228B926300A12EC5 /* DataController.swift */,
+				FF391BD2228B780900A12EC5 /* Roast+CoreDataClass.swift */,
 				FF74163322773F0500D52817 /* CoffeeSpy.xcdatamodeld */,
 			);
 			path = CoreData;
@@ -323,10 +335,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				FFE2AFC5227A0E5600C68D63 /* Roast.swift in Sources */,
+				FF391BD4228B780900A12EC5 /* Roast+CoreDataClass.swift in Sources */,
+				FF391BD9228B9A1600A12EC5 /* RoastsViewController.swift in Sources */,
 				FF105EED22728E0D006FD778 /* SettingsViewController.swift in Sources */,
 				FF463344228737D200E3E70C /* Utilities.swift in Sources */,
+				FF391BD7228B926300A12EC5 /* DataController.swift in Sources */,
 				FF105EE922728E0D006FD778 /* AppDelegate.swift in Sources */,
 				FF74163822773F5C00D52817 /* BleManager.swift in Sources */,
+				FF391BDB228B9A6900A12EC5 /* RoastCell.swift in Sources */,
 				FF74163522773F0500D52817 /* CoffeeSpy.xcdatamodeld in Sources */,
 				FF105EEB22728E0D006FD778 /* RoastViewController.swift in Sources */,
 			);
