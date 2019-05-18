@@ -55,7 +55,7 @@ class RoastsViewController: UITableViewController {
         }
         
         let roast = fetchedResultsController.object(at: indexPath)
-        cell.testLabel.text = "Roast \(roast.startTimestamp!)"
+        cell.testLabel.text = "Roast 1st \(roast.firstCrackStartTime) - 2nd \(roast.secondCrackStartTime)"
         
         return cell
     }

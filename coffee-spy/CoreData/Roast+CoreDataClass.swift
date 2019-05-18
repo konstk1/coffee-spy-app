@@ -23,26 +23,43 @@ public class Roast: NSManagedObject {
     }
     
     func start() {
-        guard !isRunning else { print("Warning: starting running roast"); return }  // only start if not running
+        guard !isRunning else { log.warning("Roast already running"); return }  // only start if not running
         startTimestamp = Date()
     }
     
-    func markFC() {
-        firstCrackTime = elapsedTime
+    func markFirstCrackStart() {
+        guard isRunning else { log.warning("Roast not running"); return }
+        firstCrackStartTime = elapsedTime
+        log.info("1st crack start: \(firstCrackStartTime) sec")
     }
     
-    func marcSC() {
-        secondCrackTime = elapsedTime
+    func markFirstCrackEnd() {
+        guard isRunning else { log.warning("Roast not running"); return }
+        firstCrackEndTime = elapsedTime
+        log.info("1st crack end: \(firstCrackEndTime) sec")
+    }
+    
+    func marcSecondCrackStart() {
+        guard isRunning else { log.warning("Roast not running"); return }
+        secondCrackStartTime = elapsedTime
+        log.info("2nd crack start: \(secondCrackStartTime) sec")
+    }
+    
+    func marcSecondCrackEnd() {
+        guard isRunning else { log.warning("Roast not running"); return }
+        secondCrackEndTime = elapsedTime
+        log.info("2nd crack: \(secondCrackEndTime) sec")
     }
     
     func stop() {
-        guard isRunning else { print("Warning: stopping non-running roast"); return }     // only stop if running
+        guard isRunning else { log.warning("Roast not running"); return }     // only stop if running
         stopTime = elapsedTime
+        log.info("Stopped roast: \(stopTime) sec")
     }
     
     fileprivate func makeTimestamp(time: TimeInterval?) -> TimeInterval? {
         // only add samples if roast hasn't been stopped
-        guard stopTime == 0 else { print("Warning: roast stopped"); return nil }
+        guard stopTime == 0 else { log.warning("Roast stopped"); return nil }
         
         switch (time, startTimestamp) {
         case let (nil, startTimestamp?):        // no time provided, requires startTimestamp
@@ -50,22 +67,7 @@ public class Roast: NSManagedObject {
         case let (time?, _):                    // time provided, ignore startTimestamp
             return time
         default:                                // no time provided and roast hasn't started
-            print("Warning: no timestamp available")
-            return nil                          // ignore sample
-        }
-    }
-    
-    fileprivate func makeSample(time: TimeInterval?) -> TimeInterval? {
-        // only add samples if roast hasn't been stopped
-        guard stopTime == 0 else { print("Warning: roast stopped"); return nil }
-        
-        switch (time, startTimestamp) {
-        case let (nil, startTimestamp?):        // no time provided, requires startTimestamp
-            return Date().timeIntervalSince(startTimestamp)
-        case let (time?, _):                    // time provided, ignore startTimestamp
-            return time
-        default:                                // no time provided and roast hasn't started
-            print("Warning: no timestamp available")
+            log.warning("No timestamp available")
             return nil                          // ignore sample
         }
     }
@@ -73,7 +75,7 @@ public class Roast: NSManagedObject {
     func addBtSample(temp: DegreesC, time: TimeInterval? = nil) {
         guard let time = makeTimestamp(time: time),
               let context = managedObjectContext else {
-            print("Warning: BT sample ignored")
+            log.warning("BT sample ignored")
             return
         }
         
@@ -87,7 +89,7 @@ public class Roast: NSManagedObject {
     func addEtSample(temp: DegreesC, time: TimeInterval? = nil) {
         guard let time = makeTimestamp(time: time),
               let context = managedObjectContext else {
-            print("Warning: ET sample ignored")
+            log.warning("ET sample ignored")
             return
         }
         
@@ -102,10 +104,7 @@ public class Roast: NSManagedObject {
 public extension Roast {
     func loadSampleCsv() {
         let path = Bundle.main.path(forResource: "SampleRoast", ofType: "csv")
-        print(path)
         let data = try! String(contentsOfFile: path!)
-        
-        //        print(data)
         
         for line in data.components(separatedBy: "\n")[1...] {
             var time: Int = 0
@@ -132,7 +131,7 @@ public extension Roast {
             addEtSample(temp: envTemp, time: TimeInterval(time))
         }
         
-        print("Loaded \(btCurve?.count ?? 0) samples")
+        log.info("Loaded \(btCurve?.count ?? 0) samples")
     }
     
     func printData() {

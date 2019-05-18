@@ -18,8 +18,16 @@ class RoastViewController: UIViewController {
     private var roast: Roast?
     private var roastTimer: Timer?
     
+    private var devRatio: Double = 0.0 {
+        didSet {
+            devRatioLabel.text = String(format: "Dev: %2.0f%%", devRatio * 100)
+        }
+    }
+    
     @IBOutlet weak var chartView: LineChartView!
     
+    @IBOutlet weak var roastInfoLabel: UILabel!
+    @IBOutlet weak var devRatioLabel: UILabel!
     @IBOutlet weak var btLabel: UILabel!
     @IBOutlet weak var etLabel: UILabel!
     @IBOutlet weak var deviceLabel: UILabel!
@@ -40,12 +48,12 @@ class RoastViewController: UIViewController {
         // create new roast
         roast = Roast(context: context!)
         
-        // clear chart data
-        chartView.data?.dataSets[0].clear()
-        chartView.data?.dataSets[1].clear()
-        chartView.notifyDataSetChanged()
+        // clear and reset chart data
+        chartView.data?.dataSets.removeAll()
+        setupLineChart()
         
         timerLabel.text = roast?.elapsedTime.asMinSecString()
+        devRatio = 0.0
     }
     
     @IBAction func startPushed(_ sender: UIButton) {
@@ -55,7 +63,11 @@ class RoastViewController: UIViewController {
             roast?.start()
             
             roastTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] (timer) in
-                self?.timerLabel.text = self?.roast?.elapsedTime.asMinSecString()
+                guard let roast = self?.roast else { log.error("No roast"); return }
+                self?.timerLabel.text = roast.elapsedTime.asMinSecString()
+                if roast.firstCrackStartTime > 0 {
+                    self?.devRatio = 1.0 - roast.firstCrackStartTime / roast.elapsedTime
+                }
             }
             
             startButton.setTitle("STOP", for: .normal)
@@ -68,9 +80,17 @@ class RoastViewController: UIViewController {
     }
     
     @IBAction func fcPushed(_ sender: UIButton) {
+        roast?.markFirstCrackStart()
+        if let roast = roast, roast.firstCrackStartTime > 0 {
+            setFcMarker(at: roast.firstCrackStartTime)
+        }
     }
     
     @IBAction func scPushed(_ sender: UIButton) {
+        roast?.marcSecondCrackStart()
+        if let roast = roast, roast.secondCrackStartTime > 0 {
+            setScMarker(at: roast.secondCrackStartTime)
+        }
     }
     
     @IBAction func savePushed(_ sender: Any) {
@@ -194,6 +214,33 @@ extension RoastViewController {
         chartView.rightAxis.drawGridLinesEnabled = false
         
         chartView.notifyDataSetChanged()
+    }
+    
+    func setVerticalMarker(at time: Double, label: String, color: UIColor) {
+        let entries = [ChartDataEntry(x: time, y: 0.0), ChartDataEntry(x: time, y: chartView.leftAxis.axisMaximum)]
+        
+        if let dataSet = chartView.data?.getDataSetByLabel(label, ignorecase: false) {
+            chartView.data?.removeDataSet(dataSet)
+        }
+        
+        let dataSet = LineChartDataSet(entries: entries, label: label)
+        dataSet.lineWidth = 1.0
+        dataSet.drawCirclesEnabled = false
+        dataSet.drawValuesEnabled = false
+        dataSet.axisDependency = .left
+        dataSet.setColor(color)
+        
+        chartView.data?.addDataSet(dataSet)
+        
+        chartView.notifyDataSetChanged()
+    }
+    
+    func setFcMarker(at time: Double) {
+        setVerticalMarker(at: time, label: "FC", color: .white)
+    }
+    
+    func setScMarker(at time: Double) {
+        setVerticalMarker(at: time, label: "SC", color: .lightGray)
     }
     
     class TimeFormatter: IAxisValueFormatter {

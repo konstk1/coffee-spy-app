@@ -41,7 +41,6 @@
 		FF74163822773F5C00D52817 /* BleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF74163722773F5C00D52817 /* BleManager.swift */; };
 		FF74163C227901C900D52817 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = FF74163B227901C900D52817 /* Cartfile */; };
 		FF8079CB2287D67600C356EA /* Todo.txt in Resources */ = {isa = PBXBuildFile; fileRef = FF8079CA2287D67600C356EA /* Todo.txt */; };
-		FFE2AFC5227A0E5600C68D63 /* Roast.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE2AFC4227A0E5600C68D63 /* Roast.swift */; };
 		FFE2AFC7227A19C800C68D63 /* SampleRoast.csv in Resources */ = {isa = PBXBuildFile; fileRef = FFE2AFC6227A19C800C68D63 /* SampleRoast.csv */; };
 		FFE2AFC9227A1B9D00C68D63 /* SampleRoast.csv in CopyFiles */ = {isa = PBXBuildFile; fileRef = FFE2AFC6227A19C800C68D63 /* SampleRoast.csv */; };
 /* End PBXBuildFile section */
@@ -94,7 +93,6 @@
 		FF74163E2279046000D52817 /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = Carthage/Build/iOS/Charts.framework; sourceTree = "<group>"; };
 		FF8079CA2287D67600C356EA /* Todo.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Todo.txt; sourceTree = "<group>"; };
 		FFE2AFB22279FBF700C68D63 /* Charts.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Charts.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		FFE2AFC4227A0E5600C68D63 /* Roast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Roast.swift; sourceTree = "<group>"; };
 		FFE2AFC6227A19C800C68D63 /* SampleRoast.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SampleRoast.csv; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -146,7 +144,6 @@
 			children = (
 				FF105EE822728E0D006FD778 /* AppDelegate.swift */,
 				FF74163722773F5C00D52817 /* BleManager.swift */,
-				FFE2AFC4227A0E5600C68D63 /* Roast.swift */,
 				FF391BDA228B9A6900A12EC5 /* RoastCell.swift */,
 				FF105EEA22728E0D006FD778 /* RoastViewController.swift */,
 				FF391BD8228B9A1600A12EC5 /* RoastsViewController.swift */,
@@ -346,7 +343,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FFE2AFC5227A0E5600C68D63 /* Roast.swift in Sources */,
 				FF391BD4228B780900A12EC5 /* Roast+CoreDataClass.swift in Sources */,
 				FF391BD9228B9A1600A12EC5 /* RoastsViewController.swift in Sources */,
 				FF105EED22728E0D006FD778 /* SettingsViewController.swift in Sources */,

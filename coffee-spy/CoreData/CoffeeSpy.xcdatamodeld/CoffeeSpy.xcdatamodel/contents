@@ -17,12 +17,15 @@
         <relationship name="roast" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Roast" inverseName="etCurve" inverseEntity="Roast" syncable="YES"/>
     </entity>
     <entity name="Roast" representedClassName="Roast" syncable="YES" codeGenerationType="category">
-        <attribute name="firstCrackTime" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="firstCrackEndTime" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="firstCrackStartTime" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="roastNote" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="secondCrackTime" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="secondCrackEndTime" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="secondCrackStartTime" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="startTimestamp" optional="YES" attributeType="Transformable" customClassName="Date" syncable="YES"/>
         <attribute name="stopTime" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="tasteNote" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="weightGrams" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="bean" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Bean" inverseName="roast" inverseEntity="Bean" syncable="YES"/>
         <relationship name="btCurve" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="BtSample" inverseName="roast" inverseEntity="BtSample" syncable="YES"/>
         <relationship name="etCurve" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="EtSample" inverseName="roast" inverseEntity="EtSample" syncable="YES"/>
@@ -32,10 +35,10 @@
         <attribute name="time" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Roast" positionX="-63" positionY="-18" width="128" height="180"/>
-        <element name="TempSample" positionX="-63" positionY="-18" width="128" height="75"/>
         <element name="Bean" positionX="-45" positionY="45" width="128" height="165"/>
         <element name="BtSample" positionX="-36" positionY="99" width="128" height="60"/>
         <element name="EtSample" positionX="-27" positionY="108" width="128" height="60"/>
+        <element name="Roast" positionX="-63" positionY="-18" width="128" height="225"/>
+        <element name="TempSample" positionX="-63" positionY="-18" width="128" height="75"/>
     </elements>
 </model>
