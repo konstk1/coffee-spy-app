@@ -41,6 +41,7 @@
 		FF74163822773F5C00D52817 /* BleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF74163722773F5C00D52817 /* BleManager.swift */; };
 		FF74163C227901C900D52817 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = FF74163B227901C900D52817 /* Cartfile */; };
 		FF8079CB2287D67600C356EA /* Todo.txt in Resources */ = {isa = PBXBuildFile; fileRef = FF8079CA2287D67600C356EA /* Todo.txt */; };
+		FFC88D7A22B97E8C00CB527D /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = FFC88D7922B97E8C00CB527D /* Secrets.plist */; };
 		FFE2AFC7227A19C800C68D63 /* SampleRoast.csv in Resources */ = {isa = PBXBuildFile; fileRef = FFE2AFC6227A19C800C68D63 /* SampleRoast.csv */; };
 		FFE2AFC9227A1B9D00C68D63 /* SampleRoast.csv in CopyFiles */ = {isa = PBXBuildFile; fileRef = FFE2AFC6227A19C800C68D63 /* SampleRoast.csv */; };
 /* End PBXBuildFile section */
@@ -92,6 +93,7 @@
 		FF74163B227901C900D52817 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		FF74163E2279046000D52817 /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = Carthage/Build/iOS/Charts.framework; sourceTree = "<group>"; };
 		FF8079CA2287D67600C356EA /* Todo.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Todo.txt; sourceTree = "<group>"; };
+		FFC88D7922B97E8C00CB527D /* Secrets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Secrets.plist; sourceTree = "<group>"; };
 		FFE2AFB22279FBF700C68D63 /* Charts.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Charts.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		FFE2AFC6227A19C800C68D63 /* SampleRoast.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SampleRoast.csv; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -155,6 +157,7 @@
 				FF105EF122728E0E006FD778 /* Assets.xcassets */,
 				FF105EF322728E0E006FD778 /* LaunchScreen.storyboard */,
 				FF105EF622728E0E006FD778 /* Info.plist */,
+				FFC88D7922B97E8C00CB527D /* Secrets.plist */,
 			);
 			path = "coffee-spy";
 			sourceTree = "<group>";
@@ -281,6 +284,7 @@
 			files = (
 				FF105EF522728E0E006FD778 /* LaunchScreen.storyboard in Resources */,
 				FFE2AFC7227A19C800C68D63 /* SampleRoast.csv in Resources */,
+				FFC88D7A22B97E8C00CB527D /* Secrets.plist in Resources */,
 				FF8079CB2287D67600C356EA /* Todo.txt in Resources */,
 				FF105EF222728E0E006FD778 /* Assets.xcassets in Resources */,
 				FF74163C227901C900D52817 /* Cartfile in Resources */,

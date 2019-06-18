@@ -2,7 +2,7 @@ import PlaygroundSupport
 import UIKit
 import Charts
 
-let roast = MyRoast()
+let roast = Roast()
 roast.loadSampleCsv()
 
 // Line Data

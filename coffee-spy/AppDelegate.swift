@@ -27,7 +27,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         console.levelColor.warning = "🔶 "
         console.levelColor.error   = "🛑 "
         
+        
         log.addDestination(console)
+        
+        if let secrets = getPlist(named: "Secrets"),
+           let appID = secrets["SwiftyBeaverAppID"], let appSecret = secrets["SwiftyBeaverAppSecret"], let encryptionKey = secrets["SwiftyBeaverEncryptionKey"] {
+            let cloud = SBPlatformDestination(appID: appID, appSecret: appSecret, encryptionKey: encryptionKey)
+            cloud.analyticsUserName = "coffee-spy"
+            log.verbose("Adding SB cloud log destination")
+            log.addDestination(cloud)
+        }
         
         return true
     }
