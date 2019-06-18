@@ -119,6 +119,11 @@ extension BleManager: CBCentralManagerDelegate {
         log.info("Disconnected from coffee-spy")
         coffeeSpyPeriph = nil
         delegate?.didDisconnect()
+        
+        if let error = error {
+            log.error("Disconnect error: \(error.localizedDescription)")
+            centralManager.connect(peripheral, options: nil)
+        }
     }
 }
 
