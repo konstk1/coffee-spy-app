@@ -128,8 +128,19 @@ extension RoastViewController: BleManagerDelegate {
             roast.addBtSample(temp: tempC)
             
             // add sample to chart
-            guard let sample = roast.btCurve?.lastObject as? BtSample else { return }
-            self.chartView.data!.addEntry(ChartDataEntry(x: sample.time, y: sample.tempC.asFahrenheit()), dataSetIndex: 0)
+            guard let btCurve = roast.btCurve, let lastSample = btCurve.lastObject as? BtSample else { return }
+            self.chartView.data!.addEntry(ChartDataEntry(x: lastSample.time, y: lastSample.tempC.asFahrenheit()), dataSetIndex: RoastDataSetIndex.bt.rawValue)
+            
+            // add delta data point
+            let btWindowSize = 5
+            if btCurve.count >= btWindowSize, let prevSample = btCurve.object(at: btCurve.count - btWindowSize) as? BtSample {
+                let deltaF = lastSample.tempC.asFahrenheit() - prevSample.tempC.asFahrenheit()
+                let deltaT = lastSample.time - prevSample.time
+                let ror = deltaF / deltaT * 60
+                log.debug("T \(lastSample.time): cur \(lastSample.tempC.asFahrenheit())F prev \(prevSample.tempC.asFahrenheit())F, delta \(deltaF) F ror \(ror) F/min")
+                self.chartView.data!.addEntry(ChartDataEntry(x: lastSample.time, y: ror), dataSetIndex: RoastDataSetIndex.deltaBt.rawValue)
+            }
+            
             self.chartView.notifyDataSetChanged()
         }
     }
@@ -148,7 +159,7 @@ extension RoastViewController: BleManagerDelegate {
             
             // add sample to chart
             guard let sample = roast.etCurve?.lastObject as? EtSample else { return }
-            self.chartView.data!.addEntry(ChartDataEntry(x: sample.time, y: sample.tempC.asFahrenheit()), dataSetIndex: 1)
+            self.chartView.data!.addEntry(ChartDataEntry(x: sample.time, y: sample.tempC.asFahrenheit()), dataSetIndex: RoastDataSetIndex.et.rawValue)
             self.chartView.notifyDataSetChanged()
         }
     }
@@ -156,63 +167,7 @@ extension RoastViewController: BleManagerDelegate {
 
 extension RoastViewController {
     private func setupLineChart() {
-        // BT line
-        let btSet = LineChartDataSet(entries: nil, label: "BT")
-        btSet.setColor(.green)
-        btSet.lineWidth = 2
-        btSet.drawCirclesEnabled = false
-        btSet.highlightLineDashLengths = [5, 2.5]
-        btSet.drawValuesEnabled = false
-        btSet.axisDependency = .left
-        
-        // ET line
-        let etSet = LineChartDataSet(entries: nil, label: "ET")
-        etSet.setColor(.yellow)
-        etSet.lineWidth = 2
-        etSet.drawCirclesEnabled = false
-        etSet.highlightLineDashLengths = [5, 2.5]
-        etSet.drawValuesEnabled = false
-        etSet.axisDependency = .left
-        
-        let data = LineChartData(dataSets: [btSet, etSet])
-        
-        // chart
-        chartView.data = data
-        chartView.backgroundColor = UIColor(red: 0.2, green: 0.5, blue: 1, alpha: 0)
-        chartView.doubleTapToZoomEnabled = false
-        
-        // legend
-        chartView.legend.textColor = .white
-        chartView.legend.horizontalAlignment = .right
-        chartView.legend.verticalAlignment = .top
-        chartView.legend.drawInside = true
-        
-        // x axis
-        chartView.xAxis.axisMinimum = 0
-        chartView.xAxis.axisMaximum = 15 * 60
-        chartView.xAxis.labelCount = 16
-        chartView.xAxis.forceLabelsEnabled = true
-        chartView.xAxis.labelPosition = .bottom
-        chartView.xAxis.labelTextColor = .white
-        chartView.xAxis.valueFormatter = TimeFormatter()
-        chartView.xAxis.drawGridLinesEnabled = true
-        chartView.xAxis.gridColor = .white
-        chartView.xAxis.gridLineWidth = 0.2
-        chartView.xAxis.gridLineDashLengths = [5, 4]
-        
-        // left y axis
-        chartView.leftAxis.axisMinimum = 0.0
-        chartView.leftAxis.axisMaximum = 500.0
-        chartView.leftAxis.labelCount = 10
-        chartView.leftAxis.gridColor = .white
-        chartView.leftAxis.labelTextColor = .white
-        
-        // right y axis
-        chartView.rightAxis.axisMinimum = 0.0
-        chartView.rightAxis.axisMaximum = 50.0
-        chartView.rightAxis.labelTextColor = .white
-        chartView.rightAxis.drawGridLinesEnabled = false
-        
+        chartView.configRoastChart()
         chartView.notifyDataSetChanged()
     }
     
@@ -242,10 +197,5 @@ extension RoastViewController {
     func setScMarker(at time: Double) {
         setVerticalMarker(at: time, label: "SC", color: .lightGray)
     }
-    
-    class TimeFormatter: IAxisValueFormatter {
-        func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-            return value.asMinSecString()
-        }
-    }
 }
+

@@ -61,7 +61,7 @@ final class BleManager: NSObject {
         let roast = Roast(context: context)
         roast.loadSampleCsv()
         DispatchQueue.main.async {
-            self.simTimer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: true) { [weak self] (timer) in
+            self.simTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] (timer) in
                 let context = context
                 let (btSample, etSample) = (roast.btCurve!.object(at: i % roast.btCurve!.count) as! BtSample, roast.etCurve!.object(at: i % roast.etCurve!.count) as! EtSample)
                 self?.delegate?.didUpdateTemperature1(tempC: Int(btSample.tempC))

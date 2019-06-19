@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
-    <device id="retina5_9" orientation="landscape">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14810.12" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+    <device id="retina5_9" orientation="landscape" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14766.15"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -149,7 +147,7 @@
             </objects>
             <point key="canvasLocation" x="750" y="-320.80000000000001"/>
         </scene>
-        <!--Roasts-->
+        <!--Roasts View Controller-->
         <scene sceneID="txE-AR-BbB">
             <objects>
                 <tableViewController id="gOB-CG-en3" customClass="RoastsViewController" customModule="coffee_spy" customModuleProvider="target" sceneMemberID="viewController">
@@ -159,10 +157,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="roastCell" id="NbU-32-Ht1" customClass="RoastCell" customModule="coffee_spy" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="812" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="812" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="NbU-32-Ht1" id="ejf-f3-9gU">
-                                    <rect key="frame" x="44" y="0.0" width="724" height="43.666666666666664"/>
+                                    <rect key="frame" x="44" y="0.0" width="724" height="43.666667938232422"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nMj-B5-M1W">
@@ -176,6 +174,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="testLabel" destination="nMj-B5-M1W" id="C3o-Tc-Oj2"/>
+                                    <segue destination="Uru-Io-m4i" kind="show" id="Jnc-5I-xdn"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -184,11 +183,36 @@
                             <outlet property="delegate" destination="gOB-CG-en3" id="ynl-FR-IwF"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Roasts" id="lQn-Pj-vQx"/>
+                    <navigationItem key="navigationItem" id="G1d-IU-Byh"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lZ4-eC-6MB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="747.78325123152717" y="396"/>
+            <point key="canvasLocation" x="1388" y="396"/>
+        </scene>
+        <!--Roast Profile View Controller-->
+        <scene sceneID="C43-iD-Vvl">
+            <objects>
+                <viewController id="Uru-Io-m4i" customClass="RoastProfileViewController" customModule="coffee_spy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Q6k-EX-Ihp">
+                        <rect key="frame" x="0.0" y="0.0" width="812" height="322"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hDV-O4-Shq" customClass="LineChartView" customModule="Charts">
+                                <rect key="frame" x="0.0" y="32" width="812" height="290"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.19697789490000001" green="0.44314829160000002" blue="0.71999318800000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="neg-DO-uMv"/>
+                    </view>
+                    <connections>
+                        <outlet property="chartView" destination="hDV-O4-Shq" id="YW9-jZ-OOD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7cJ-BH-sIv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2038.6699507389164" y="389.60000000000002"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -203,7 +227,7 @@
                     <connections>
                         <segue destination="9pv-A4-QxB" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
                         <segue destination="hC0-XJ-kYI" kind="relationship" relationship="viewControllers" id="TQI-n5-sGg"/>
-                        <segue destination="gOB-CG-en3" kind="relationship" relationship="viewControllers" id="NaJ-Va-c2J"/>
+                        <segue destination="6Iv-Wa-UH5" kind="relationship" relationship="viewControllers" id="NaJ-Va-c2J"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
@@ -246,6 +270,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="irC-Fh-2tY" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="750" y="1140"/>
+        </scene>
+        <!--Roasts-->
+        <scene sceneID="X1E-ae-TzF">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6Iv-Wa-UH5" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Roasts" id="lQn-Pj-vQx"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="hXa-1x-Ws3">
+                        <rect key="frame" x="0.0" y="0.0" width="812" height="32"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="gOB-CG-en3" kind="relationship" relationship="rootViewController" id="Wlz-qP-9eO"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hiu-9e-aAl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="747.78325123152717" y="396"/>
         </scene>
     </scenes>
     <resources>
