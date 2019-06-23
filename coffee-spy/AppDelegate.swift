@@ -20,6 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        application.isIdleTimerDisabled = true      // disable screen locking
+        
         let console = ConsoleDestination()
         console.levelColor.verbose = "◻️ "
         console.levelColor.debug   = "◼️ "

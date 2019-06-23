@@ -1,18 +1,16 @@
 Bugs:
 
 Next:
-- Save roasts to CoreData
 - UI to add roast details
-- View roasts
+- View saved roasts
 - Labels for chart axis
 - Settings view (Eureka?)
   - BT/ET probe selection
   - Temps for roast phases (https://artisan-scope.org/docs/phases/)
-- Mark events (FC, SC)
 - How/when to disconnect from device (when it's off/btn0?)
+- Optimize live plotting (collect BT + ET before refreshing?)
 
 HW:
-- Move CS pins from 2 (Boot) and from 5 (LED)
 - LED to indicate connection / SPI reads
 - Turn on using RST
 - Turn off/sleep hold BTN-0
