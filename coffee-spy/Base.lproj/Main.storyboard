@@ -174,7 +174,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="testLabel" destination="nMj-B5-M1W" id="C3o-Tc-Oj2"/>
-                                    <segue destination="Uru-Io-m4i" kind="show" id="Jnc-5I-xdn"/>
+                                    <segue destination="Uru-Io-m4i" kind="show" identifier="segueToRoastProfile" id="Jnc-5I-xdn"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -189,7 +189,7 @@
             </objects>
             <point key="canvasLocation" x="1388" y="396"/>
         </scene>
-        <!--Roast Profile View Controller-->
+        <!--Title-->
         <scene sceneID="C43-iD-Vvl">
             <objects>
                 <viewController id="Uru-Io-m4i" customClass="RoastProfileViewController" customModule="coffee_spy" customModuleProvider="target" sceneMemberID="viewController">
@@ -206,6 +206,13 @@
                         <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="neg-DO-uMv"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Title" id="TwP-gG-hor">
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="SQr-Xh-C6t">
+                            <connections>
+                                <action selector="shareClicked:" destination="Uru-Io-m4i" id="yEr-KI-HzU"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="chartView" destination="hDV-O4-Shq" id="YW9-jZ-OOD"/>
                     </connections>

@@ -102,6 +102,26 @@ public class Roast: NSManagedObject {
 }
 
 public extension Roast {
+    func asCsv() -> String {
+        var csv = "t(s),bt(C),bt(F),t(s),et(C),et(F)\n"
+        
+        var i = 0
+        var btVal: BtSample?
+        var etVal: EtSample?
+        
+        
+        repeat {
+            btVal = (btCurve?.count ?? 0) > i ? btCurve?.object(at: i) as? BtSample : nil
+            etVal = (etCurve?.count ?? 0) > i ? etCurve?.object(at: i) as? EtSample : nil
+            
+            csv += "\(btVal?.time ?? 0),\(btVal?.tempC ?? 0),\(btVal?.tempC.asFahrenheit() ?? 0),\(etVal?.time ?? 0),\(etVal?.tempC ?? 0),\(etVal?.tempC.asFahrenheit() ?? 0)\n"
+            i += 1
+        } while btVal != nil || etVal != nil
+        
+        print(csv)
+        return csv
+    }
+    
     func loadSampleCsv() {
         let path = Bundle.main.path(forResource: "SampleRoast", ofType: "csv")
         let data = try! String(contentsOfFile: path!)

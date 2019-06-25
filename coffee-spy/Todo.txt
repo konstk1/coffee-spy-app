@@ -1,6 +1,7 @@
 Bugs:
 
 Next:
+- Export roast CSV
 - UI to add roast details
 - View saved roasts
 - Labels for chart axis
@@ -11,6 +12,7 @@ Next:
 - Optimize live plotting (collect BT + ET before refreshing?)
 
 HW:
+x Report temp in LSB (0.25C)
 - LED to indicate connection / SPI reads
 - Turn on using RST
 - Turn off/sleep hold BTN-0
