@@ -18,14 +18,39 @@ class RoastProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let button = UIButton(type: .system)
-        button.titleLabel!.text = "Share"
-//        button.setImage(UIImage(systemName: "Share"), for: .normal)
-        button.addTarget(self, action: #selector(shareClicked), for: .touchUpInside)
-        view.addSubview(button)
-
-        print("Loaded with roast \(roast!)")
-        // Do any additional setup after loading the view.
+        setupChart()
+    }
+    
+    func setupChart() {
+        chartView.configRoastChart()
+        
+        guard let roast = roast else { return }
+        
+        let dataSets = (chartView.data as? LineChartData)?.dataSets
+        
+        if let btSet = dataSets?[RoastDataSetIndex.bt.rawValue] {
+            roast.btCurve?.forEach {
+                guard let bt = $0 as? BtSample else { return }
+                _ = btSet.addEntry(ChartDataEntry(x: bt.time, y: bt.tempC.asFahrenheit()))
+            }
+        }
+        
+        if let etSet = dataSets?[RoastDataSetIndex.et.rawValue] {
+            roast.etCurve?.forEach {
+                guard let et = $0 as? EtSample else { return }
+                _ = etSet.addEntry(ChartDataEntry(x: et.time, y: et.tempC.asFahrenheit()))
+            }
+        }
+        
+        
+//        let btEntries = roast.btCurve?.array.compactMap({ (x) -> ChartDataEntry? in
+//            guard let bt = x as? BtSample else { return nil }
+//            return ChartDataEntry(x: bt.time, y: bt.tempC.asFahrenheit())
+//        })
+        
+//        chartView.data?.dataSets[RoastDataSetIndex.bt]
+        chartView.notifyDataSetChanged()
+        
     }
     
     @IBAction func shareClicked(_ sender: UIBarButtonItem) {
@@ -38,9 +63,14 @@ class RoastProfileViewController: UIViewController {
         try! roast.asCsv().write(to: path, atomically: true, encoding: .utf8)
         
         let activityVc = UIActivityViewController(activityItems: ["Roast export", path], applicationActivities: nil)
-        present(activityVc, animated: true, completion: nil)
-        
-//        try! FileManager.default.removeItem(at: path)
+        present(activityVc, animated: true) {
+            do {
+                log.verbose("Removing csv")
+                try FileManager.default.removeItem(at: path)
+            } catch {
+                log.error("Failed to remove file: \(error)")
+            }
+        }
     }
     
     // MARK: - Navigation

@@ -1,4 +1,5 @@
 Bugs:
+- Device doesn't reconnect after reset
 
 Next:
 - Export roast CSV
