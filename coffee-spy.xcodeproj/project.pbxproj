@@ -33,9 +33,6 @@
 		FF391BD7228B926300A12EC5 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF391BD6228B926300A12EC5 /* DataController.swift */; };
 		FF391BD9228B9A1600A12EC5 /* RoastsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF391BD8228B9A1600A12EC5 /* RoastsViewController.swift */; };
 		FF391BDB228B9A6900A12EC5 /* RoastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF391BDA228B9A6900A12EC5 /* RoastCell.swift */; };
-		FF391BDC228CADCD00A12EC5 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF74163E2279046000D52817 /* Charts.framework */; };
-		FF391BDF228CADCE00A12EC5 /* SwiftyBeaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF391BDD228CADCD00A12EC5 /* SwiftyBeaver.framework */; };
-		FF391BE0228CADCE00A12EC5 /* Eureka.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF391BDE228CADCE00A12EC5 /* Eureka.framework */; };
 		FF463344228737D200E3E70C /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF463343228737D200E3E70C /* Utilities.swift */; };
 		FF74163522773F0500D52817 /* CoffeeSpy.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FF74163322773F0500D52817 /* CoffeeSpy.xcdatamodeld */; };
 		FF74163822773F5C00D52817 /* BleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF74163722773F5C00D52817 /* BleManager.swift */; };
@@ -43,6 +40,15 @@
 		FF8079CB2287D67600C356EA /* Todo.txt in Resources */ = {isa = PBXBuildFile; fileRef = FF8079CA2287D67600C356EA /* Todo.txt */; };
 		FF8857A522BAC52200139744 /* RoastProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8857A422BAC52200139744 /* RoastProfileViewController.swift */; };
 		FF8857A922BAC98000139744 /* RoastChartConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8857A822BAC98000139744 /* RoastChartConfig.swift */; };
+		FFA86B2022C54C29009625A8 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF74163E2279046000D52817 /* Charts.framework */; };
+		FFA86B2122C54C29009625A8 /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FF74163E2279046000D52817 /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FFA86B2222C54C29009625A8 /* Eureka.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF391BDE228CADCE00A12EC5 /* Eureka.framework */; };
+		FFA86B2322C54C29009625A8 /* Eureka.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FF391BDE228CADCE00A12EC5 /* Eureka.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FFA86B2422C54C29009625A8 /* SwiftyBeaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF391BDD228CADCD00A12EC5 /* SwiftyBeaver.framework */; };
+		FFA86B2522C54C29009625A8 /* SwiftyBeaver.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FF391BDD228CADCD00A12EC5 /* SwiftyBeaver.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FFA86B2822C5954B009625A8 /* FlagKit.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FFA86B2722C5954B009625A8 /* FlagKit.xcassets */; };
+		FFA86B2A22C5975E009625A8 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA86B2922C5975E009625A8 /* Country.swift */; };
+		FFC7450022C54878005D81EB /* RoastDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC744FF22C54878005D81EB /* RoastDetailViewController.swift */; };
 		FFC88D7A22B97E8C00CB527D /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = FFC88D7922B97E8C00CB527D /* Secrets.plist */; };
 		FFE2AFC7227A19C800C68D63 /* SampleRoast.csv in Resources */ = {isa = PBXBuildFile; fileRef = FFE2AFC6227A19C800C68D63 /* SampleRoast.csv */; };
 		FFE2AFC9227A1B9D00C68D63 /* SampleRoast.csv in CopyFiles */ = {isa = PBXBuildFile; fileRef = FFE2AFC6227A19C800C68D63 /* SampleRoast.csv */; };
@@ -59,6 +65,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		FFC744F822C54603005D81EB /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				FFA86B2122C54C29009625A8 /* Charts.framework in Embed Frameworks */,
+				FFA86B2522C54C29009625A8 /* SwiftyBeaver.framework in Embed Frameworks */,
+				FFA86B2322C54C29009625A8 /* Eureka.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FFE2AFC8227A1B8500C68D63 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -97,6 +116,9 @@
 		FF8079CA2287D67600C356EA /* Todo.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Todo.txt; sourceTree = "<group>"; };
 		FF8857A422BAC52200139744 /* RoastProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoastProfileViewController.swift; sourceTree = "<group>"; };
 		FF8857A822BAC98000139744 /* RoastChartConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoastChartConfig.swift; sourceTree = "<group>"; };
+		FFA86B2722C5954B009625A8 /* FlagKit.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = FlagKit.xcassets; sourceTree = "<group>"; };
+		FFA86B2922C5975E009625A8 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
+		FFC744FF22C54878005D81EB /* RoastDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoastDetailViewController.swift; sourceTree = "<group>"; };
 		FFC88D7922B97E8C00CB527D /* Secrets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Secrets.plist; sourceTree = "<group>"; };
 		FFE2AFB22279FBF700C68D63 /* Charts.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Charts.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		FFE2AFC6227A19C800C68D63 /* SampleRoast.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SampleRoast.csv; sourceTree = "<group>"; };
@@ -107,9 +129,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FF391BDF228CADCE00A12EC5 /* SwiftyBeaver.framework in Frameworks */,
-				FF391BE0228CADCE00A12EC5 /* Eureka.framework in Frameworks */,
-				FF391BDC228CADCD00A12EC5 /* Charts.framework in Frameworks */,
+				FFA86B2022C54C29009625A8 /* Charts.framework in Frameworks */,
+				FFA86B2422C54C29009625A8 /* SwiftyBeaver.framework in Frameworks */,
+				FFA86B2222C54C29009625A8 /* Eureka.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -154,13 +176,16 @@
 				FF105EEA22728E0D006FD778 /* RoastViewController.swift */,
 				FF8857A822BAC98000139744 /* RoastChartConfig.swift */,
 				FF391BD8228B9A1600A12EC5 /* RoastsViewController.swift */,
+				FFC744FF22C54878005D81EB /* RoastDetailViewController.swift */,
 				FF8857A422BAC52200139744 /* RoastProfileViewController.swift */,
 				FF105EEC22728E0D006FD778 /* SettingsViewController.swift */,
+				FFA86B2922C5975E009625A8 /* Country.swift */,
 				FF463343228737D200E3E70C /* Utilities.swift */,
 				FF8079CA2287D67600C356EA /* Todo.txt */,
 				FF74163622773F0A00D52817 /* CoreData */,
 				FF105EEE22728E0D006FD778 /* Main.storyboard */,
 				FF105EF122728E0E006FD778 /* Assets.xcassets */,
+				FFA86B2722C5954B009625A8 /* FlagKit.xcassets */,
 				FF105EF322728E0E006FD778 /* LaunchScreen.storyboard */,
 				FF105EF622728E0E006FD778 /* Info.plist */,
 				FFC88D7922B97E8C00CB527D /* Secrets.plist */,
@@ -208,12 +233,15 @@
 				FF105EE222728E0D006FD778 /* Frameworks */,
 				FF105EE322728E0D006FD778 /* Resources */,
 				FF7416592279FAEE00D52817 /* Copy Carthage Frameworks */,
+				FFC744F822C54603005D81EB /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = "coffee-spy";
+			packageProductDependencies = (
+			);
 			productName = "coffee-spy";
 			productReference = FF105EE522728E0D006FD778 /* coffee-spy.app */;
 			productType = "com.apple.product-type.application";
@@ -272,6 +300,8 @@
 				Base,
 			);
 			mainGroup = FF105EDC22728E0D006FD778;
+			packageReferences = (
+			);
 			productRefGroup = FF105EE622728E0D006FD778 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -294,6 +324,7 @@
 				FF8079CB2287D67600C356EA /* Todo.txt in Resources */,
 				FF105EF222728E0E006FD778 /* Assets.xcassets in Resources */,
 				FF74163C227901C900D52817 /* Cartfile in Resources */,
+				FFA86B2822C5954B009625A8 /* FlagKit.xcassets in Resources */,
 				FF105EF022728E0D006FD778 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -353,6 +384,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFA86B2A22C5975E009625A8 /* Country.swift in Sources */,
 				FF391BD4228B780900A12EC5 /* Roast+CoreDataClass.swift in Sources */,
 				FF391BD9228B9A1600A12EC5 /* RoastsViewController.swift in Sources */,
 				FF105EED22728E0D006FD778 /* SettingsViewController.swift in Sources */,
@@ -365,6 +397,7 @@
 				FF74163522773F0500D52817 /* CoffeeSpy.xcdatamodeld in Sources */,
 				FF8857A922BAC98000139744 /* RoastChartConfig.swift in Sources */,
 				FF105EEB22728E0D006FD778 /* RoastViewController.swift in Sources */,
+				FFC7450022C54878005D81EB /* RoastDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
