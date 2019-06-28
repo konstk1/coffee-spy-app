@@ -54,9 +54,11 @@ extension RoastDetailViewController {
             }
         }
             
-        <<< TextRow {
+        <<< SegmentedRow<String> {
             // TODO: make this pick from list
-            $0.title = "Process"
+            $0.title = "Process                                   "
+            $0.options = ["Washed", "Natural"]
+            $0.value = $0.options![0]
         }
             
         <<< SwitchRow {
@@ -72,8 +74,10 @@ extension RoastDetailViewController {
         
         section
         
-        <<< TextRow {
-            $0.title = "Weight"
+        <<< StepperRow {
+            $0.title = "Weight (oz)"
+            $0.value = 8
+            $0.cell.stepper.minimumValue = 0
         }
             
         <<< TextRow {
