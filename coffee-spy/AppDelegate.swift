@@ -32,6 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         log.addDestination(console)
         
+        #if !targetEnvironment(simulator)
         if let secrets = getPlist(named: "Secrets"),
            let appID = secrets["SwiftyBeaverAppID"], let appSecret = secrets["SwiftyBeaverAppSecret"], let encryptionKey = secrets["SwiftyBeaverEncryptionKey"] {
             let cloud = SBPlatformDestination(appID: appID, appSecret: appSecret, encryptionKey: encryptionKey)
@@ -39,6 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             log.verbose("Adding SB cloud log destination")
             log.addDestination(cloud)
         }
+        #endif
         
         return true
     }

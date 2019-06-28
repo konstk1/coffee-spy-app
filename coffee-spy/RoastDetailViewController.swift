@@ -41,9 +41,17 @@ extension RoastDetailViewController {
             $0.title = "Seller"
         }
         
-        <<< TextRow {
+        <<< PushRow<Country> {
             // TODO: make this pick from list sectioned by continent
             $0.title = "Country"
+            $0.options = Country.availableCountries
+            $0.selectorTitle = "Choose country"
+        }.onPresent { from, to in
+            to.dismissOnSelection = true
+            to.dismissOnChange = true
+            to.sectionKeyForValue = {
+                return $0.region.rawValue
+            }
         }
             
         <<< TextRow {
