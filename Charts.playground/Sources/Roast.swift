@@ -94,9 +94,9 @@ import Foundation
 //                    time = Int(timeParts[0])! * 60 + Int(timeParts[1])!
 //                case 2:
 //                    // this sample csv has temps in F, need to convert to C
-//                    beanTemp = Double(column)!.asCelcius()
+//                    beanTemp = Double(column)!.asCelsius()
 //                case 3:
-//                    envTemp = Double(column)!.asCelcius()
+//                    envTemp = Double(column)!.asCelsius()
 //                default:
 //                    // nothing
 //                    break

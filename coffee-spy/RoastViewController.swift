@@ -115,9 +115,9 @@ extension RoastViewController: BleManagerDelegate {
         }
     }
     
-    func didUpdateTemperature1(tempC: Int) {
+    func didUpdateTemperature1(tempC: DegreesC) {
         DispatchQueue.main.async { [unowned self] in
-            self.btLabel.text = "BT: \(Int(Double(tempC).asFahrenheit()))°F"
+            self.btLabel.text = "BT: \(String(format: "%5.1f", tempC.asFahrenheit()))°F"
             
             // if roast is not running, ignore updates
             guard let roast = self.roast, roast.isRunning else { return }
@@ -145,9 +145,9 @@ extension RoastViewController: BleManagerDelegate {
         }
     }
     
-    func didUpdateTemperature2(tempC: Int) {
+    func didUpdateTemperature2(tempC: DegreesC) {
         DispatchQueue.main.async { [unowned self] in
-            self.etLabel.text = "ET: \(Int(Double(tempC).asFahrenheit()))°F"
+            self.etLabel.text = "ET: \(String(format: "%5.1f", tempC.asFahrenheit()))°F"
             
             // if roast is not running, ignore updates
             guard let roast = self.roast, roast.isRunning else { return }

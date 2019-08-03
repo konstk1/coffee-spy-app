@@ -13,11 +13,13 @@ let coffeeSpyServiceUUID = CBUUID(string: "CFFE")
 let coffeeTemp1CharServiceUUID = CBUUID(string: "FE01")
 let coffeeTemp2CharServiceUUID = CBUUID(string: "FE02")
 
+let degreesCelsiusPerLsb = 0.25
+
 protocol BleManagerDelegate: class {
     func didConnect(uuidStr: String)
     func didDisconnect()
-    func didUpdateTemperature1(tempC: Int)
-    func didUpdateTemperature2(tempC: Int)
+    func didUpdateTemperature1(tempC: DegreesC)
+    func didUpdateTemperature2(tempC: DegreesC)
 }
 
 final class BleManager: NSObject {
@@ -64,8 +66,8 @@ final class BleManager: NSObject {
             self.simTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] (timer) in
                 let context = context
                 let (btSample, etSample) = (roast.btCurve!.object(at: i % roast.btCurve!.count) as! BtSample, roast.etCurve!.object(at: i % roast.etCurve!.count) as! EtSample)
-                self?.delegate?.didUpdateTemperature1(tempC: Int(btSample.tempC))
-                self?.delegate?.didUpdateTemperature2(tempC: Int(etSample.tempC))
+                self?.delegate?.didUpdateTemperature1(tempC: btSample.tempC)
+                self?.delegate?.didUpdateTemperature2(tempC: etSample.tempC)
                 i += 1
             }
         }
@@ -160,14 +162,16 @@ extension BleManager: CBPeripheralDelegate {
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         guard let value = characteristic.value else { return }
         
-        let tempC: Int32 = value.withUnsafeBytes { $0.load(as: Int32.self) }.bigEndian
-        log.verbose("Updated char \(characteristic) with \(tempC)")
+        let tempRawCounts: Int32 = value.withUnsafeBytes { $0.load(as: Int32.self) }.bigEndian
+        log.verbose("Updated char \(characteristic) with \(tempRawCounts)")
+        
+        let tempC = Double(tempRawCounts) * degreesCelsiusPerLsb
         
         switch characteristic.uuid {
         case coffeeTemp1CharServiceUUID:
-            delegate?.didUpdateTemperature1(tempC: Int(tempC))
+            delegate?.didUpdateTemperature1(tempC: tempC)
         case coffeeTemp2CharServiceUUID:
-            delegate?.didUpdateTemperature2(tempC: Int(tempC))
+            delegate?.didUpdateTemperature2(tempC: tempC)
         default:
             log.warning("BLE: Notify on unknown char")
             break

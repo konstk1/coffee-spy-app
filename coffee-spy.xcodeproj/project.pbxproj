@@ -36,7 +36,7 @@
 		FF391BDC228CADCD00A12EC5 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF74163E2279046000D52817 /* Charts.framework */; };
 		FF391BDF228CADCE00A12EC5 /* SwiftyBeaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF391BDD228CADCD00A12EC5 /* SwiftyBeaver.framework */; };
 		FF391BE0228CADCE00A12EC5 /* Eureka.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF391BDE228CADCE00A12EC5 /* Eureka.framework */; };
-		FF463344228737D200E3E70C /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF463343228737D200E3E70C /* Utilities.swift */; };
+		FF5269C722F50F8B00604388 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5269C622F50F8B00604388 /* Utilities.swift */; };
 		FF74163522773F0500D52817 /* CoffeeSpy.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FF74163322773F0500D52817 /* CoffeeSpy.xcdatamodeld */; };
 		FF74163822773F5C00D52817 /* BleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF74163722773F5C00D52817 /* BleManager.swift */; };
 		FF74163C227901C900D52817 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = FF74163B227901C900D52817 /* Cartfile */; };
@@ -89,7 +89,7 @@
 		FF391BDA228B9A6900A12EC5 /* RoastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoastCell.swift; sourceTree = "<group>"; };
 		FF391BDD228CADCD00A12EC5 /* SwiftyBeaver.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyBeaver.framework; path = Carthage/Build/iOS/SwiftyBeaver.framework; sourceTree = "<group>"; };
 		FF391BDE228CADCE00A12EC5 /* Eureka.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Eureka.framework; path = Carthage/Build/iOS/Eureka.framework; sourceTree = "<group>"; };
-		FF463343228737D200E3E70C /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		FF5269C622F50F8B00604388 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		FF74163422773F0500D52817 /* CoffeeSpy.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoffeeSpy.xcdatamodel; sourceTree = "<group>"; };
 		FF74163722773F5C00D52817 /* BleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleManager.swift; sourceTree = "<group>"; };
 		FF74163B227901C900D52817 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
@@ -156,7 +156,7 @@
 				FF391BD8228B9A1600A12EC5 /* RoastsViewController.swift */,
 				FF8857A422BAC52200139744 /* RoastProfileViewController.swift */,
 				FF105EEC22728E0D006FD778 /* SettingsViewController.swift */,
-				FF463343228737D200E3E70C /* Utilities.swift */,
+				FF5269C622F50F8B00604388 /* Utilities.swift */,
 				FF8079CA2287D67600C356EA /* Todo.txt */,
 				FF74163622773F0A00D52817 /* CoreData */,
 				FF105EEE22728E0D006FD778 /* Main.storyboard */,
@@ -357,7 +357,7 @@
 				FF391BD9228B9A1600A12EC5 /* RoastsViewController.swift in Sources */,
 				FF105EED22728E0D006FD778 /* SettingsViewController.swift in Sources */,
 				FF8857A522BAC52200139744 /* RoastProfileViewController.swift in Sources */,
-				FF463344228737D200E3E70C /* Utilities.swift in Sources */,
+				FF5269C722F50F8B00604388 /* Utilities.swift in Sources */,
 				FF391BD7228B926300A12EC5 /* DataController.swift in Sources */,
 				FF105EE922728E0D006FD778 /* AppDelegate.swift in Sources */,
 				FF74163822773F5C00D52817 /* BleManager.swift in Sources */,
@@ -528,7 +528,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = LG2FJE6R72;
+				DEVELOPMENT_TEAM = 835242HYJ5;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -551,7 +551,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = LG2FJE6R72;
+				DEVELOPMENT_TEAM = 835242HYJ5;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",

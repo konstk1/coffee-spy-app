@@ -18,7 +18,7 @@ public extension DegreesC {
 }
 
 public extension DegreesF {
-    func asCelcius() -> Double {
+    func asCelsius() -> Double {
         return (self - 32.0) * 5.0/9.0
     }
 }
