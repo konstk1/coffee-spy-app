@@ -122,7 +122,6 @@ extension RoastViewController: BleManagerDelegate {
             // if roast is not running, ignore updates
             guard let roast = self.roast, roast.isRunning else { return }
             
-            let tempC = DegreesC(tempC)
 //            print("Updated temp 1 (BT): \(tempC)°C (\(tempC.asFahrenheit())°F)")
             // add sample to roast
             roast.addBtSample(temp: tempC)
@@ -132,7 +131,7 @@ extension RoastViewController: BleManagerDelegate {
             self.chartView.data!.addEntry(ChartDataEntry(x: lastSample.time, y: lastSample.tempC.asFahrenheit()), dataSetIndex: RoastDataSetIndex.bt.rawValue)
             
             // add delta data point
-            let btWindowSize = 5
+            let btWindowSize = 20
             if btCurve.count >= btWindowSize, let prevSample = btCurve.object(at: btCurve.count - btWindowSize) as? BtSample {
                 let deltaF = lastSample.tempC.asFahrenheit() - prevSample.tempC.asFahrenheit()
                 let deltaT = lastSample.time - prevSample.time
@@ -152,7 +151,6 @@ extension RoastViewController: BleManagerDelegate {
             // if roast is not running, ignore updates
             guard let roast = self.roast, roast.isRunning else { return }
             
-            let tempC = DegreesC(tempC)
 //            print("Updated temp 2 (ET): \(tempC)°C (\(tempC.asFahrenheit())°F)")
             // add sample to roast
             roast.addEtSample(temp: Double(tempC))
