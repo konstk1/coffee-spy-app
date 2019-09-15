@@ -72,7 +72,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		FF105EE522728E0D006FD778 /* coffee-spy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "coffee-spy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF105EE522728E0D006FD778 /* Coffee Spy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Coffee Spy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF105EE822728E0D006FD778 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FF105EEA22728E0D006FD778 /* RoastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoastViewController.swift; sourceTree = "<group>"; };
 		FF105EEC22728E0D006FD778 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -139,7 +139,7 @@
 		FF105EE622728E0D006FD778 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FF105EE522728E0D006FD778 /* coffee-spy.app */,
+				FF105EE522728E0D006FD778 /* Coffee Spy.app */,
 				FF105EFB22728E0E006FD778 /* coffee-spyTests.xctest */,
 			);
 			name = Products;
@@ -215,7 +215,7 @@
 			);
 			name = "coffee-spy";
 			productName = "coffee-spy";
-			productReference = FF105EE522728E0D006FD778 /* coffee-spy.app */;
+			productReference = FF105EE522728E0D006FD778 /* Coffee Spy.app */;
 			productType = "com.apple.product-type.application";
 		};
 		FF105EFA22728E0E006FD778 /* coffee-spyTests */ = {
@@ -539,7 +539,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kk.coffee-spy";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Coffee Spy";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -562,7 +562,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kk.coffee-spy";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Coffee Spy";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
