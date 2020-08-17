@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXAggregateTarget section */
@@ -29,13 +29,13 @@
 		FF105EF222728E0E006FD778 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF105EF122728E0E006FD778 /* Assets.xcassets */; };
 		FF105EF522728E0E006FD778 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF105EF322728E0E006FD778 /* LaunchScreen.storyboard */; };
 		FF105F0022728E0E006FD778 /* coffee_spyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF105EFF22728E0E006FD778 /* coffee_spyTests.swift */; };
+		FF2A4A3D24E9D2F0003AA219 /* Eureka in Frameworks */ = {isa = PBXBuildFile; productRef = FF2A4A3C24E9D2F0003AA219 /* Eureka */; };
+		FF2A4A4024E9D32A003AA219 /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = FF2A4A3F24E9D32A003AA219 /* SwiftyBeaver */; };
+		FF2A4A4324E9D35E003AA219 /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = FF2A4A4224E9D35E003AA219 /* Charts */; };
 		FF391BD4228B780900A12EC5 /* Roast+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF391BD2228B780900A12EC5 /* Roast+CoreDataClass.swift */; };
 		FF391BD7228B926300A12EC5 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF391BD6228B926300A12EC5 /* DataController.swift */; };
 		FF391BD9228B9A1600A12EC5 /* RoastsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF391BD8228B9A1600A12EC5 /* RoastsViewController.swift */; };
 		FF391BDB228B9A6900A12EC5 /* RoastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF391BDA228B9A6900A12EC5 /* RoastCell.swift */; };
-		FF391BDC228CADCD00A12EC5 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF74163E2279046000D52817 /* Charts.framework */; };
-		FF391BDF228CADCE00A12EC5 /* SwiftyBeaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF391BDD228CADCD00A12EC5 /* SwiftyBeaver.framework */; };
-		FF391BE0228CADCE00A12EC5 /* Eureka.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF391BDE228CADCE00A12EC5 /* Eureka.framework */; };
 		FF5269C722F50F8B00604388 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5269C622F50F8B00604388 /* Utilities.swift */; };
 		FF74163522773F0500D52817 /* CoffeeSpy.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FF74163322773F0500D52817 /* CoffeeSpy.xcdatamodeld */; };
 		FF74163822773F5C00D52817 /* BleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF74163722773F5C00D52817 /* BleManager.swift */; };
@@ -87,13 +87,10 @@
 		FF391BD6228B926300A12EC5 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		FF391BD8228B9A1600A12EC5 /* RoastsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoastsViewController.swift; sourceTree = "<group>"; };
 		FF391BDA228B9A6900A12EC5 /* RoastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoastCell.swift; sourceTree = "<group>"; };
-		FF391BDD228CADCD00A12EC5 /* SwiftyBeaver.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyBeaver.framework; path = Carthage/Build/iOS/SwiftyBeaver.framework; sourceTree = "<group>"; };
-		FF391BDE228CADCE00A12EC5 /* Eureka.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Eureka.framework; path = Carthage/Build/iOS/Eureka.framework; sourceTree = "<group>"; };
 		FF5269C622F50F8B00604388 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		FF74163422773F0500D52817 /* CoffeeSpy.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoffeeSpy.xcdatamodel; sourceTree = "<group>"; };
 		FF74163722773F5C00D52817 /* BleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleManager.swift; sourceTree = "<group>"; };
 		FF74163B227901C900D52817 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
-		FF74163E2279046000D52817 /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = Carthage/Build/iOS/Charts.framework; sourceTree = "<group>"; };
 		FF8079CA2287D67600C356EA /* Todo.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Todo.txt; sourceTree = "<group>"; };
 		FF8857A422BAC52200139744 /* RoastProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoastProfileViewController.swift; sourceTree = "<group>"; };
 		FF8857A822BAC98000139744 /* RoastChartConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoastChartConfig.swift; sourceTree = "<group>"; };
@@ -107,9 +104,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FF391BDF228CADCE00A12EC5 /* SwiftyBeaver.framework in Frameworks */,
-				FF391BE0228CADCE00A12EC5 /* Eureka.framework in Frameworks */,
-				FF391BDC228CADCD00A12EC5 /* Charts.framework in Frameworks */,
+				FF2A4A3D24E9D2F0003AA219 /* Eureka in Frameworks */,
+				FF2A4A4324E9D35E003AA219 /* Charts in Frameworks */,
+				FF2A4A4024E9D32A003AA219 /* SwiftyBeaver in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,7 +129,6 @@
 				FF105EE722728E0D006FD778 /* coffee-spy */,
 				FF105EFE22728E0E006FD778 /* coffee-spyTests */,
 				FF105EE622728E0D006FD778 /* Products */,
-				FF74163D2279046000D52817 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -187,16 +183,6 @@
 			path = CoreData;
 			sourceTree = "<group>";
 		};
-		FF74163D2279046000D52817 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				FF74163E2279046000D52817 /* Charts.framework */,
-				FF391BDE228CADCE00A12EC5 /* Eureka.framework */,
-				FF391BDD228CADCD00A12EC5 /* SwiftyBeaver.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -207,13 +193,17 @@
 				FF105EE122728E0D006FD778 /* Sources */,
 				FF105EE222728E0D006FD778 /* Frameworks */,
 				FF105EE322728E0D006FD778 /* Resources */,
-				FF7416592279FAEE00D52817 /* Copy Carthage Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = "coffee-spy";
+			packageProductDependencies = (
+				FF2A4A3C24E9D2F0003AA219 /* Eureka */,
+				FF2A4A3F24E9D32A003AA219 /* SwiftyBeaver */,
+				FF2A4A4224E9D35E003AA219 /* Charts */,
+			);
 			productName = "coffee-spy";
 			productReference = FF105EE522728E0D006FD778 /* Coffee Spy.app */;
 			productType = "com.apple.product-type.application";
@@ -243,7 +233,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1020;
-				LastUpgradeCheck = 1020;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = KK;
 				TargetAttributes = {
 					FF105EE422728E0D006FD778 = {
@@ -272,6 +262,11 @@
 				Base,
 			);
 			mainGroup = FF105EDC22728E0D006FD778;
+			packageReferences = (
+				FF2A4A3B24E9D2F0003AA219 /* XCRemoteSwiftPackageReference "Eureka" */,
+				FF2A4A3E24E9D32A003AA219 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */,
+				FF2A4A4124E9D35E003AA219 /* XCRemoteSwiftPackageReference "Charts" */,
+			);
 			productRefGroup = FF105EE622728E0D006FD778 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -308,27 +303,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		FF7416592279FAEE00D52817 /* Copy Carthage Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/Charts.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Eureka.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/SwiftyBeaver.framework",
-			);
-			name = "Copy Carthage Frameworks";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "#!/bin/sh\ncarthage copy-frameworks\n";
-		};
 		FFE2AFC2227A0A0400C68D63 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -432,6 +406,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -493,6 +468,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -528,7 +504,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 835242HYJ5;
+				DEVELOPMENT_TEAM = LG2FJE6R72;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -670,6 +646,51 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		FF2A4A3B24E9D2F0003AA219 /* XCRemoteSwiftPackageReference "Eureka" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/xmartlabs/Eureka.git";
+			requirement = {
+				branch = xcode12;
+				kind = branch;
+			};
+		};
+		FF2A4A3E24E9D32A003AA219 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyBeaver/SwiftyBeaver.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.9.1;
+			};
+		};
+		FF2A4A4124E9D35E003AA219 /* XCRemoteSwiftPackageReference "Charts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/danielgindi/Charts.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.5.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FF2A4A3C24E9D2F0003AA219 /* Eureka */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF2A4A3B24E9D2F0003AA219 /* XCRemoteSwiftPackageReference "Eureka" */;
+			productName = Eureka;
+		};
+		FF2A4A3F24E9D32A003AA219 /* SwiftyBeaver */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF2A4A3E24E9D32A003AA219 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */;
+			productName = SwiftyBeaver;
+		};
+		FF2A4A4224E9D35E003AA219 /* Charts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF2A4A4124E9D35E003AA219 /* XCRemoteSwiftPackageReference "Charts" */;
+			productName = Charts;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		FF74163322773F0500D52817 /* CoffeeSpy.xcdatamodeld */ = {
